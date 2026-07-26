@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BULAENG - Principal Portal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B132B',       /* Deep Luxurious Navy */
+              navyLight: '#1C2541',  /* Lighter Navy Container */
+              navyCard: '#131F3A',   /* Premium Card Background */
+              gold: '#D4AF37',      /* Classic Metallic Gold */
+              goldHover: '#B8962E', /* Rich Gold Hover */
+              light: '#FAFAFC',      /* Soft Neutral Background */
+            }
+          },
+          fontFamily: {
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '20px',
+            'xl': '16px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Grid Pattern Bulaeng */
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1C2541; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
+</head>
+<body class="h-full font-body bg-brand-navy text-slate-100 antialiased flex flex-col bg-grid-pattern">
+
+  <!-- HEADER NAVIGATION LUXURY NAVY & GOLD -->
+  <header class="bg-brand-navyCard border-b border-brand-gold/30 h-20 sticky top-0 z-40 flex items-center justify-between px-4 sm:px-6 shadow-xl">
+    
+    <div class="flex items-center gap-4 sm:gap-6">
+      <!-- Logo BULAENG -->
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Logo BULAENG" class="h-10 w-auto object-contain brightness-110" onerror="this.style.display='none'">
+        <div class="flex flex-col">
+          <span class="font-heading font-black text-lg leading-none text-white tracking-wider">BULAENG</span>
+          <span class="text-[9px] font-bold text-brand-gold tracking-widest uppercase mt-0.5">Principal Portal</span>
+        </div>
+      </a>
+
+      <div class="h-6 w-[1px] bg-brand-gold/20 hidden sm:block"></div>
+      
+      <!-- Indicator Nama Sekolah -->
+      <div class="hidden sm:flex items-center gap-2 bg-brand-navyLight px-3.5 py-1.5 rounded-xl border border-brand-gold/20 text-xs font-semibold text-slate-300">
+        <i data-lucide="building-2" class="w-4 h-4 text-brand-gold"></i>
+        <span>[Nama Sekolah / TK Anda]</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 sm:gap-4">
+      <!-- Notification Icon -->
+      <button class="relative p-2.5 rounded-xl bg-brand-navyLight text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-all border border-brand-gold/20">
+        <i data-lucide="bell" class="w-4 h-4"></i>
+        <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-400 ring-2 ring-brand-navyCard"></span>
+      </button>
+
+      <!-- Profil Kepala Sekolah Ringkas -->
+      <div class="hidden md:flex items-center gap-3 pl-2 border-l border-brand-gold/20">
+        <div class="w-9 h-9 rounded-xl bg-brand-gold/20 border border-brand-gold/40 flex items-center justify-center text-brand-gold font-bold overflow-hidden">
+          <i data-lucide="award" class="w-5 h-5"></i>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-xs font-bold text-white leading-tight">[Nama Kepala Sekolah, M.Pd.]</span>
+          <span class="text-[10px] font-medium text-brand-gold/80">Kepala Sekolah</span>
+        </div>
+      </div>
+
+      <!-- TOMBOL KEMBALI KE BERANDA -->
+      <a href="index.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg hover:shadow-brand-gold/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap">
+        <i data-lucide="home" class="w-4 h-4 text-brand-navy"></i>
+        <span class="hidden sm:inline">Kembali ke Beranda</span>
+        <span class="sm:hidden">Beranda</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- SIDEBAR NAVIGATION MENU -->
+    <aside class="w-64 bg-brand-navyCard border-r border-brand-gold/20 text-slate-300 flex flex-col justify-between p-4 flex-shrink-0 hidden md:flex">
+      
+      <nav class="space-y-1.5">
+        <p class="px-3 text-[10px] font-black uppercase tracking-widest text-brand-gold/70 mb-3">Pusat Kendali</p>
+
+        <a href="#ringkasan" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-brand-navy bg-gradient-to-r from-brand-gold to-yellow-500 shadow-md transition-all">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-navy"></i>
+          <span>🏫 Ikhtisar Sekolah</span>
+        </a>
+
+        <a href="#monitoring-guru" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="user-check" class="w-4 h-4 text-brand-gold"></i>
+          <span>👩‍🏫 Monitoring Guru</span>
+        </a>
+
+        <a href="#persetujuan-rapor" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="file-check-2" class="w-4 h-4 text-brand-gold"></i>
+          <span>📊 Approval e-Rapor</span>
+        </a>
+
+        <a href="#rekap-kehadiran" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="bar-chart-3" class="w-4 h-4 text-brand-gold"></i>
+          <span>📈 Statistik & Kehadiran</span>
+        </a>
+
+        <a href="#kemitraan" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="handshake" class="w-4 h-4 text-brand-gold"></i>
+          <span>🤝 Portal Orang Tua</span>
+        </a>
+
+        <div class="pt-4 pb-2">
+          <p class="px-3 text-[10px] font-black uppercase tracking-widest text-brand-gold/70 mb-3">Laporan Resmi</p>
+        </div>
+
+        <a href="#laporan-dinas" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 hover:bg-brand-gold/20 transition-all">
+          <i data-lucide="download" class="w-4 h-4 text-brand-gold"></i>
+          <span>📑 Ekspor Laporan Dikbud</span>
+        </a>
+
+        <a href="#pengaturan" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="settings" class="w-4 h-4 text-brand-gold"></i>
+          <span>⚙️ Isi Profil & Sekolah</span>
+        </a>
+      </nav>
+
+      <!-- Status Bar Sync -->
+      <div class="bg-brand-navyLight/80 rounded-2xl p-3.5 border border-brand-gold/20 text-xs">
+        <div class="flex items-center justify-between mb-1">
+          <span class="font-bold text-white text-[11px]">Pilot Project</span>
+          <span class="text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded font-bold uppercase">AKTIF</span>
+        </div>
+        <p class="text-[10px] text-slate-400">Sistem Cloud Terhubung</p>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-8">
+
+      <!-- WELCOME HERO BANNER -->
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-brand-navyCard p-6 rounded-2xl border border-brand-gold/30 shadow-xl gold-glow">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black font-heading text-white">Selamat Pagi, Ibu/Bapak Kepala Sekolah! 👑</h1>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1">Laporan Ekosistem Pembelajaran Real-time Sekolah Anda</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="bg-brand-navyLight border border-brand-gold/30 hover:border-brand-gold text-brand-gold font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 hover:scale-105">
+              <i data-lucide="printer" class="w-4 h-4 text-brand-gold"></i> Cetak Laporan Pagi
+            </button>
+          </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-brand-gold uppercase tracking-widest">Total Siswa Aktif</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-white mt-1">0 <span class="text-xs font-normal text-slate-400">Siswa</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Kehadiran Hari Ini</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-emerald-400 mt-1">0% <span class="text-xs font-normal text-slate-400">(0/0)</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold">
+              <i data-lucide="trending-up" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-brand-gold uppercase tracking-widest">Guru Aktif Mengajar</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-brand-gold mt-1">0 <span class="text-xs font-normal text-slate-400">Pengajar</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-brand-gold/10 border border-brand-gold/30 text-brand-gold flex items-center justify-center font-bold">
+              <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Approval e-Rapor</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-amber-400 mt-1">0 <span class="text-xs font-normal text-slate-400">Menunggu</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold">
+              <i data-lucide="file-search" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT GRID -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT COLUMN: CLASS MONITORING -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/30 p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-brand-gold/20 pb-4">
+              <div>
+                <h3 class="font-bold text-base text-white font-heading">Monitoring Kelas Harian</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Pantau aktivitas pengajaran dan pengisian presensi guru secara real-time</p>
+              </div>
+              <span class="text-[10px] font-bold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full uppercase tracking-wider">Kelola di Pengaturan</span>
+            </div>
+
+            <div class="space-y-3">
+              
+              <!-- Card Monitoring Kelompok A -->
+              <div class="p-4 bg-brand-navyLight border border-brand-gold/20 rounded-2xl space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-navy border border-brand-gold/40 text-brand-gold flex items-center justify-center font-bold text-sm">
+                      A
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold text-white">Kelompok A (PAUD / TK-A)</p>
+                      <p class="text-xs text-slate-400">Wali Kelas: [Nama Guru Wali Kelas A]</p>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-lg">Presensi Selesai</span>
+                </div>
+                <div class="flex items-center justify-between text-xs pt-2.5 border-t border-slate-700/60 text-slate-300">
+                  <span>Kehadiran: <strong class="text-white">0 / 0 Anak</strong></span>
+                  <span>Modul: <strong class="text-brand-gold">Modul #01 (Mengenal Warna)</strong></span>
+                </div>
+              </div>
+
+              <!-- Card Monitoring Kelompok B -->
+              <div class="p-4 bg-brand-navyLight/50 border border-slate-700/60 rounded-2xl space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-navy border border-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm">
+                      B
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold text-slate-200">Kelompok B (TK-B)</p>
+                      <p class="text-xs text-slate-400">Wali Kelas: [Nama Guru Wali Kelas B]</p>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/40 rounded-lg">Sedang Mengisi</span>
+                </div>
+                <div class="flex items-center justify-between text-xs pt-2.5 border-t border-slate-700/60 text-slate-400">
+                  <span>Kehadiran: <strong class="text-slate-200">0 / 0 Anak</strong></span>
+                  <span>Modul: <strong class="text-slate-200">Modul #02 (Lagu & Budaya Samawa)</strong></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: E-RAPOR APPROVAL & SCHOOL PROFILE -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- E-RAPOR APPROVAL CONTAINER -->
+          <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/30 p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-brand-gold/20 pb-3">
+              <div>
+                <h3 class="font-bold text-base text-white font-heading">Persetujuan e-Rapor</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Draft rapor dari guru yang perlu ditinjau Kepala Sekolah</p>
+              </div>
+            </div>
+
+            <div class="p-6 border border-dashed border-brand-gold/30 bg-brand-navyLight/30 rounded-2xl text-center space-y-2">
+              <i data-lucide="file-check-2" class="w-8 h-8 text-brand-gold/60 mx-auto"></i>
+              <p class="text-xs text-slate-300 font-medium">Belum ada draft e-Rapor yang masuk.</p>
+              <p class="text-[11px] text-slate-400 leading-relaxed">Guru kelas akan mengirimkan draft otomatis setelah asesmen harian murid lengkap.</p>
+            </div>
+          </div>
+
+          <!-- INTEGRATED SYSTEM BRANDING CARD -->
+          <div class="bg-gradient-to-b from-brand-navyCard to-brand-navyLight p-6 rounded-2xl text-white space-y-4 border border-brand-gold/40 shadow-xl gold-glow">
+            <div class="flex items-center gap-3">
+              <img src="assets/logo.png" alt="Logo BULAENG" class="h-9 w-auto object-contain brightness-110" onerror="this.style.display='none'">
+              <div>
+                <h4 class="font-bold text-sm text-brand-gold font-heading">Sistem Terintegrasi BULAENG</h4>
+                <p class="text-[11px] text-slate-300">Standar Kurikulum Merdeka PAUD & Local Wisdom</p>
+              </div>
+            </div>
+            <button class="w-full bg-brand-navy border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold text-xs py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+              <i data-lucide="settings" class="w-4 h-4"></i> Buka Pengaturan Profil Sekolah
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

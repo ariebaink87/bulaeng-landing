@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BULAENG - Dashboard Presensi Realtime</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                navy: '#0B132B',       /* Deep Luxurious Navy */
+                navyLight: '#1C2541',  /* Lighter Navy Container */
+                navyCard: '#131F3A',   /* Premium Card Background */
+                gold: '#D4AF37',      /* Classic Metallic Gold */
+                goldHover: '#B8962E', /* Rich Gold Hover */
+                light: '#FAFAFC',      /* Soft Neutral Background */
+              }
+            },
+            fontFamily: {
+              heading: ['Plus Jakarta Sans', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      .bg-grid-pattern {
+        background-image: radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .gold-glow {
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+      }
+    </style>
+</head>
+<body class="bg-brand-navy text-slate-100 font-body antialiased min-h-screen p-4 sm:p-6 md:p-8 bg-grid-pattern">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- HEADER LUXURY NAVY & GOLD WITH HOME BUTTON -->
+        <header class="flex flex-col sm:flex-row justify-between items-center bg-brand-navyCard p-6 rounded-2xl border border-brand-gold/30 shadow-2xl gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="flex-shrink-0 group">
+                    <img src="assets/logo.png" alt="Logo BULAENG" class="h-12 w-auto object-contain brightness-110 transition-transform group-hover:scale-105">
+                </a>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-black font-heading text-white tracking-wide">BULAENG</h1>
+                        <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Presensi Realtime</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">Ekosistem Monitoring & Presensi Edukasi Terintegrasi</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                <!-- Live Indicator -->
+                <div id="status-connection" class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3.5 py-2 rounded-xl text-xs font-semibold backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Realtime Active</span>
+                </div>
+
+                <!-- Tombol Kembali ke Beranda -->
+                <a href="index.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg hover:shadow-brand-gold/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap">
+                    <svg class="w-4 h-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    <span>Beranda</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- RINGKASAN STATISTIK ELEGANT -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1: Total Murid -->
+            <div class="bg-gradient-to-b from-brand-navyCard to-brand-navy p-6 rounded-2xl border border-brand-gold/20 shadow-xl relative overflow-hidden gold-glow">
+                <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-brand-gold/5 rounded-full blur-xl"></div>
+                <p class="text-brand-gold text-xs font-bold uppercase tracking-widest">Total Murid Terdaftar</p>
+                <h3 id="stat-total-murid" class="text-4xl font-black font-heading text-white mt-2">0</h3>
+                <p class="text-[10px] text-slate-400 mt-2">Database siswa aktif</p>
+            </div>
+
+            <!-- Card 2: Hadir Hari Ini -->
+            <div class="bg-gradient-to-b from-brand-navyCard to-brand-navy p-6 rounded-2xl border border-emerald-500/30 shadow-xl relative overflow-hidden">
+                <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest">Hadir Hari Ini</p>
+                <h3 id="stat-hadir" class="text-4xl font-black font-heading text-emerald-400 mt-2">0</h3>
+                <p class="text-[10px] text-slate-400 mt-2">Tercatat masuk sistem</p>
+            </div>
+
+            <!-- Card 3: Izin / Sakit -->
+            <div class="bg-gradient-to-b from-brand-navyCard to-brand-navy p-6 rounded-2xl border border-amber-500/30 shadow-xl relative overflow-hidden">
+                <p class="text-amber-400 text-xs font-bold uppercase tracking-widest">Izin / Sakit</p>
+                <h3 id="stat-izin-sakit" class="text-4xl font-black font-heading text-amber-400 mt-2">0</h3>
+                <p class="text-[10px] text-slate-400 mt-2">Konfirmasi dari orang tua</p>
+            </div>
+        </div>
+
+        <!-- TABEL PRESENSI REALTIME MEWAH -->
+        <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/30 shadow-2xl overflow-hidden gold-glow">
+            <div class="p-6 border-b border-brand-gold/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <div>
+                    <h2 class="font-bold font-heading text-white text-lg">Daftar Presensi Harian</h2>
+                    <p class="text-xs text-slate-400">Jurnal aktivitas kedatangan siswa secara langsung</p>
+                </div>
+                <span class="text-[10px] font-bold text-brand-gold uppercase tracking-wider bg-brand-gold/10 border border-brand-gold/30 px-3 py-1 rounded-full">
+                    ⚡ Auto-Sync Supabase
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-brand-navyLight text-brand-gold text-xs font-bold uppercase tracking-wider border-b border-brand-gold/20">
+                        <tr>
+                            <th class="p-4">Nama Murid</th>
+                            <th class="p-4">Status</th>
+                            <th class="p-4">Waktu Masuk</th>
+                            <th class="p-4">Catatan Jurnal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-presensi-body" class="divide-y divide-slate-800/60 text-slate-200">
+                        <tr>
+                            <td colspan="4" class="p-6 text-center text-slate-400">Memuat data realtime...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT ORIGINAL SUPABASE (TIDAK ADA PERUBAHAN LOGIKA) -->
+    <script>
+        // 1. Inisialisasi Supabase Client
+        const SUPABASE_URL = "https://lbavmgbrlzvcnsgzrqgo.supabase.co";
+        // API Key Supabase Anda
+        const SUPABASE_KEY = "sb_publishable_Hi6icyQERJWcrzVnNW177A_zOq3ETtV"; 
+
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // 2. Fungsi Fetch Data Presensi & Murid
+        async function fetchDashboardData() {
+            try {
+                // Ambil Total Murid
+                const { count: totalMurid, error: errorMurid } = await supabaseClient
+                    .from('murid')
+                    .select('*', { count: 'exact', head: true });
+
+                if (errorMurid) {
+                    console.error("Gagal mengambil total murid:", errorMurid);
+                } else {
+                    document.getElementById('stat-total-murid').textContent = totalMurid || 0;
+                }
+
+                // Ambil Data Presensi Hari Ini
+                const today = new Date().toISOString().split('T')[0];
+                const { data: presensiData, error: errorPresensi } = await supabaseClient
+                    .from('presensi')
+                    .select(`
+                        id, status, waktu_masuk, catatan,
+                        murid ( nama_lengkap )
+                    `)
+                    .eq('tanggal', today);
+
+                if (errorPresensi) {
+                    console.error("Gagal mengambil presensi:", errorPresensi);
+                    return;
+                }
+
+                // Hitung statistik presensi
+                const hadirCount = (presensiData || []).filter(item => item.status === 'Hadir').length;
+                const izinSakitCount = (presensiData || []).filter(item => item.status === 'Izin' || item.status === 'Sakit').length;
+
+                // Update angka di statistik
+                document.getElementById('stat-hadir').textContent = hadirCount;
+                document.getElementById('stat-izin-sakit').textContent = izinSakitCount;
+
+                // Render ke tabel dengan Style Mewah BULAENG
+                const tbody = document.getElementById('table-presensi-body');
+                if (tbody) {
+                    if (!presensiData || presensiData.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-slate-400 italic">Belum ada data presensi terdeteksi hari ini.</td></tr>`;
+                    } else {
+                        tbody.innerHTML = presensiData.map(item => `
+                            <tr class="hover:bg-brand-navyLight/50 transition-colors">
+                                <td class="p-4 font-semibold text-white">${item.murid?.nama_lengkap || '-'}</td>
+                                <td class="p-4">
+                                    <span class="px-3 py-1 rounded-lg text-xs font-bold ${
+                                        item.status === 'Hadir' 
+                                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' 
+                                        : 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
+                                    }">
+                                        ${item.status}
+                                    </span>
+                                </td>
+                                <td class="p-4 text-slate-300 font-mono text-xs">${item.waktu_masuk ? item.waktu_masuk.substring(0, 5) : '-'} WIB</td>
+                                <td class="p-4 text-slate-400 text-xs">${item.catatan || '-'}</td>
+                            </tr>
+                        `).join('');
+                    }
+                }
+            } catch (err) {
+                console.error("Terjadi kesalahan:", err);
+            }
+        }
+
+        // 3. Fungsi Listener Realtime (Supabase Channel)
+        function setupRealtimeSubscription() {
+            supabaseClient
+                .channel('realtime-presensi')
+                .on(
+                    'postgres_changes',
+                    { event: '*', schema: 'public', table: 'presensi' },
+                    (payload) => {
+                        console.log('Perubahan data terdeteksi secara realtime:', payload);
+                        fetchDashboardData();
+                    }
+                )
+                .subscribe();
+        }
+
+        // 4. Jalankan fungsi saat halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchDashboardData();
+            setupRealtimeSubscription();
+        });
+    </script>
+</body>
+</html>

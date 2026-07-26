@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BULAENG - Teacher Portal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B132B',       /* Deep Luxurious Navy */
+              navyLight: '#1C2541',  /* Lighter Navy Container */
+              navyCard: '#131F3A',   /* Premium Card Background */
+              gold: '#D4AF37',      /* Classic Metallic Gold */
+              goldHover: '#B8962E', /* Rich Gold Hover */
+              light: '#FAFAFC',      /* Soft Neutral Background */
+            }
+          },
+          fontFamily: {
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '20px',
+            'xl': '16px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Grid Pattern Bulaeng */
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1C2541; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
+</head>
+<body class="h-full font-body bg-brand-navy text-slate-100 antialiased flex flex-col bg-grid-pattern">
+
+  <!-- HEADER NAVIGATION LUXURY NAVY & GOLD -->
+  <header class="bg-brand-navyCard border-b border-brand-gold/30 h-20 sticky top-0 z-40 flex items-center justify-between px-4 sm:px-6 shadow-xl">
+    
+    <div class="flex items-center gap-4 sm:gap-6">
+      <!-- Logo BULAENG -->
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Logo BULAENG" class="h-10 w-auto object-contain brightness-110" onerror="this.style.display='none'">
+        <div class="flex flex-col">
+          <span class="font-heading font-black text-lg leading-none text-white tracking-wider">BULAENG</span>
+          <span class="text-[9px] font-bold text-brand-gold tracking-widest uppercase mt-0.5">Teacher Portal</span>
+        </div>
+      </a>
+
+      <div class="h-6 w-[1px] bg-brand-gold/20 hidden sm:block"></div>
+      
+      <!-- Indicator Nama Sekolah -->
+      <div class="hidden sm:flex items-center gap-2 bg-brand-navyLight px-3.5 py-1.5 rounded-xl border border-brand-gold/20 text-xs font-semibold text-slate-300">
+        <i data-lucide="building-2" class="w-4 h-4 text-brand-gold"></i>
+        <span id="schoolNameHeader">[Nama Sekolah Anda]</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 sm:gap-4">
+      <!-- Notification Icon -->
+      <button class="relative p-2.5 rounded-xl bg-brand-navyLight text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-all border border-brand-gold/20">
+        <i data-lucide="bell" class="w-4 h-4"></i>
+        <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-400 ring-2 ring-brand-navyCard"></span>
+      </button>
+
+      <!-- Profil Guru Ringkas -->
+      <div class="hidden md:flex items-center gap-3 pl-2 border-l border-brand-gold/20">
+        <div class="w-9 h-9 rounded-xl bg-brand-navyLight border border-brand-gold/40 flex items-center justify-center text-brand-gold font-bold overflow-hidden">
+          <i data-lucide="user" class="w-5 h-5"></i>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-xs font-bold text-white leading-tight">[Nama Guru, S.Pd.]</span>
+          <span class="text-[10px] font-medium text-brand-gold/80">[Wali Kelas / Kelompok]</span>
+        </div>
+      </div>
+
+      <!-- TOMBOL KEMBALI KE BERANDA -->
+      <a href="index.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg hover:shadow-brand-gold/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap">
+        <i data-lucide="home" class="w-4 h-4 text-brand-navy"></i>
+        <span class="hidden sm:inline">Kembali ke Beranda</span>
+        <span class="sm:hidden">Beranda</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- SIDEBAR NAVIGATION MENU -->
+    <aside class="w-64 bg-brand-navyCard border-r border-brand-gold/20 text-slate-300 flex flex-col justify-between p-4 flex-shrink-0 hidden md:flex">
+      
+      <nav class="space-y-1.5">
+        <p class="px-3 text-[10px] font-black uppercase tracking-widest text-brand-gold/70 mb-3">Menu Utama</p>
+
+        <a href="#beranda" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-brand-navy bg-gradient-to-r from-brand-gold to-yellow-500 shadow-md transition-all">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-navy"></i>
+          <span>Beranda Guru</span>
+        </a>
+
+        <a href="#modul" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="book-open" class="w-4 h-4 text-brand-gold"></i>
+          <span>📚 Modul Belajar</span>
+        </a>
+
+        <a href="#murid" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="users" class="w-4 h-4 text-brand-gold"></i>
+          <span>👨‍👩‍👧 Data Murid</span>
+        </a>
+
+        <a href="#presensi" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="user-check" class="w-4 h-4 text-brand-gold"></i>
+          <span>✅ Presensi Murid</span>
+        </a>
+
+        <a href="#asesmen" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="clipboard-check" class="w-4 h-4 text-brand-gold"></i>
+          <span>📊 Asesmen Harian</span>
+        </a>
+
+        <!-- LINK E-RAPOR DENGAN PARAMETER ?from=guru -->
+        <a href="erapor-cetak.html?from=guru" target="_blank" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="file-text" class="w-4 h-4 text-brand-gold"></i>
+          <span>📄 e-Rapor Digital</span>
+        </a>
+
+        <a href="#dokumentasi" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="camera" class="w-4 h-4 text-brand-gold"></i>
+          <span>📸 Dokumentasi</span>
+        </a>
+
+        <div class="pt-4 pb-2">
+          <p class="px-3 text-[10px] font-black uppercase tracking-widest text-brand-gold/70 mb-3">Asisten & Sistem</p>
+        </div>
+
+        <a href="#ai-guru" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 hover:bg-brand-gold/20 transition-all">
+          <i data-lucide="bot" class="w-4 h-4 text-brand-gold"></i>
+          <span>🤖 AI Sahabat Guru</span>
+        </a>
+
+        <a href="#pengaturan" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-brand-navyLight transition-all border border-transparent hover:border-brand-gold/20">
+          <i data-lucide="settings" class="w-4 h-4 text-brand-gold"></i>
+          <span>⚙️ Isi Profil & Kelas</span>
+        </a>
+      </nav>
+
+      <!-- Status Bar Sync -->
+      <div class="bg-brand-navyLight/80 rounded-2xl p-3.5 border border-brand-gold/20 text-xs">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-bold text-white text-[11px]">Server Cloud BULAENG</span>
+        </div>
+        <p class="text-[10px] text-slate-400">Terhubung otomatis dengan database sekolah.</p>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-8">
+
+      <!-- WELCOME HERO BANNER -->
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-brand-navyCard p-6 rounded-2xl border border-brand-gold/30 shadow-xl gold-glow">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black font-heading text-white">Selamat Pagi, Ibu/Bapak Guru! 👋</h1>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1">Silakan kelola modul interaktif, presensi harian, dan asesmen murid Anda hari ini.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <!-- TOMBOL BUKA E-RAPOR DENGAN PARAMETER ?from=guru -->
+            <a href="erapor-cetak.html?from=guru" target="_blank" class="bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-black text-xs px-4 py-2.5 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+              <i data-lucide="file-text" class="w-4 h-4 text-brand-navy"></i> Buka & Cetak e-Rapor
+            </a>
+          </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-brand-gold uppercase tracking-widest">Jumlah Murid</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-white mt-1">0 <span class="text-xs font-normal text-slate-400">Anak</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold">
+              <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Hadir Hari Ini</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-emerald-400 mt-1">0 <span class="text-xs font-normal text-slate-400">Anak</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold">
+              <i data-lucide="user-check" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-brand-gold uppercase tracking-widest">Modul Ajar</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-brand-gold mt-1">48 <span class="text-xs font-normal text-slate-400">Tersedia</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-brand-gold/10 border border-brand-gold/30 text-brand-gold flex items-center justify-center font-bold">
+              <i data-lucide="book-open" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-brand-navyCard p-5 rounded-2xl border border-brand-gold/20 shadow-lg flex items-center justify-between">
+            <div>
+              <p class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Asesmen Menunggu</p>
+              <p class="text-2xl sm:text-3xl font-black font-heading text-amber-400 mt-1">0 <span class="text-xs font-normal text-slate-400">Anak</span></p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold">
+              <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div>
+        <h2 class="text-xs font-black uppercase tracking-widest text-brand-gold/80 mb-3">Aksi Cepat Guru</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          
+          <button class="bg-brand-navyCard hover:bg-brand-navyLight border border-brand-gold/20 p-4 rounded-2xl shadow-md transition-all text-left flex items-center gap-3 group hover:border-brand-gold/50">
+            <div class="w-10 h-10 rounded-xl bg-brand-gold/10 border border-brand-gold/30 text-brand-gold flex items-center justify-center font-bold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">
+              <i data-lucide="play" class="w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-xs sm:text-sm text-white">▶ Mulai Modul</span>
+          </button>
+
+          <button class="bg-brand-navyCard hover:bg-brand-navyLight border border-brand-gold/20 p-4 rounded-2xl shadow-md transition-all text-left flex items-center gap-3 group hover:border-brand-gold/50">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+              <i data-lucide="check-square" class="w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-xs sm:text-sm text-white">✅ Presensi</span>
+          </button>
+
+          <button class="bg-brand-navyCard hover:bg-brand-navyLight border border-brand-gold/20 p-4 rounded-2xl shadow-md transition-all text-left flex items-center gap-3 group hover:border-brand-gold/50">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold group-hover:bg-blue-500 group-hover:text-white transition-colors">
+              <i data-lucide="edit-3" class="w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-xs sm:text-sm text-white">📝 Input Asesmen</span>
+          </button>
+
+          <button class="bg-brand-navyCard hover:bg-brand-navyLight border border-brand-gold/20 p-4 rounded-2xl shadow-md transition-all text-left flex items-center gap-3 group hover:border-brand-gold/50">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold group-hover:bg-purple-500 group-hover:text-white transition-colors">
+              <i data-lucide="camera" class="w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-xs sm:text-sm text-white">📷 Dokumentasi</span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT GRID -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT COLUMN: SCHEDULE & FEATURED MODULES -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- SCHEDULE -->
+          <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/30 p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-brand-gold/20 pb-4">
+              <div class="flex items-center gap-2">
+                <i data-lucide="calendar" class="w-5 h-5 text-brand-gold"></i>
+                <h3 class="font-bold text-base text-white font-heading">Jadwal Aktivitas Hari Ini</h3>
+              </div>
+              <span class="text-xs text-slate-400 font-medium">Atur di Pengaturan</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="flex items-center justify-between p-3.5 bg-brand-navyLight border border-brand-gold/20 rounded-xl">
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold px-2.5 py-1 bg-brand-gold/20 text-brand-gold border border-brand-gold/30 rounded-lg">08.00–08.30</span>
+                  <div>
+                    <p class="text-sm font-bold text-white">Circle Time & Doa Pagi</p>
+                    <p class="text-xs text-slate-400">Pembuka Hari & Sapaan Murid</p>
+                  </div>
+                </div>
+                <button class="text-xs font-bold bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-3.5 py-1.5 rounded-xl transition-all">Tandai Selesai</button>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 bg-brand-navyLight/50 border border-slate-700/60 rounded-xl">
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-bold px-2.5 py-1 bg-slate-800 text-slate-400 rounded-lg">08.30–09.00</span>
+                  <div>
+                    <p class="text-sm font-bold text-slate-200">Materi Modul Interaktif</p>
+                    <p class="text-xs text-slate-400">Penggunaan Layar Kelas BULAENG</p>
+                  </div>
+                </div>
+                <button class="text-xs font-semibold text-slate-300 border border-slate-700 px-3 py-1.5 rounded-xl hover:bg-brand-navyLight">Mulai</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- FEATURED MODULES -->
+          <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/30 p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-brand-gold/20 pb-4">
+              <h3 class="font-bold text-base text-white font-heading">Modul Siap Putar (48 Modul)</h3>
+              <a href="content-marketplace.html" class="text-xs font-bold text-brand-gold hover:underline">Lihat Katalog →</a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <!-- Card Modul 1 -->
+              <div class="border border-brand-gold/20 bg-brand-navyLight rounded-2xl overflow-hidden hover:border-brand-gold transition-all group">
+                <div class="relative aspect-video bg-slate-900">
+                  <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=500" alt="Thumbnail Modul" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300">
+                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded">Modul #01</span>
+                </div>
+                <div class="p-4 space-y-3">
+                  <h4 class="font-bold text-sm text-white leading-snug">Mengenal Warna & Geometri</h4>
+                  <p class="text-xs text-slate-400 line-clamp-2">Modul visual interaktif mencocokkan warna dan bentuk.</p>
+                  <button class="w-full bg-brand-gold hover:bg-brand-goldHover text-brand-navy text-xs font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i> Putar di Layar
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card Modul 2 -->
+              <div class="border border-brand-gold/20 bg-brand-navyLight rounded-2xl overflow-hidden hover:border-brand-gold transition-all group">
+                <div class="relative aspect-video bg-slate-900">
+                  <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=500" alt="Thumbnail Modul" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300">
+                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded">Modul #02</span>
+                </div>
+                <div class="p-4 space-y-3">
+                  <h4 class="font-bold text-sm text-white leading-snug">Bernyanyi Lagu Anak & Samawa</h4>
+                  <p class="text-xs text-slate-400 line-clamp-2">Pengenalan nilai kearifan lokal melalui lagu.</p>
+                  <button class="w-full bg-brand-navyCard border border-brand-gold/40 text-brand-gold hover:bg-brand-navyLight text-xs font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i> Putar di Layar
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: AI ASSISTANT & PROFILE SETTINGS -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- AI SAHABAT GURU CONTAINER -->
+          <div class="bg-gradient-to-b from-brand-navyCard to-brand-navyLight rounded-2xl p-6 text-white border border-brand-gold/40 shadow-xl space-y-4 gold-glow">
+            
+            <div class="flex items-center justify-between border-b border-brand-gold/20 pb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-gold/20 text-brand-gold border border-brand-gold/40 flex items-center justify-center font-bold text-sm">
+                  🤖
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm font-heading text-white">Sahabat BULAENG AI</h3>
+                  <p class="text-[10px] text-brand-gold font-medium">Asisten Narasi Rapor Guru</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="block text-xs text-slate-300 font-medium">Ketik catatan singkat observasi murid:</label>
+              <textarea rows="3" placeholder="Misal: Ananda Budi hari ini aktif mewarnai dan mau menyapa teman saat datang..." class="w-full bg-brand-navy border border-brand-gold/30 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold"></textarea>
+              <button class="w-full bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-black text-xs py-2.5 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02]">
+                <i data-lucide="sparkles" class="w-4 h-4 text-brand-navy"></i> Generasi Narasi Otomatis
+              </button>
+            </div>
+
+            <div class="bg-brand-navy/60 border border-slate-700/80 rounded-xl p-3.5 space-y-2 text-xs">
+              <p class="text-slate-400 text-[11px] italic">
+                Hasil narasi Kurikulum Merdeka otomatis akan muncul di sini dan siap ditempel ke e-Rapor murid.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- SETTINGS QUICK CARD -->
+          <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/30 p-6 shadow-xl space-y-3">
+            <h3 class="font-bold text-base text-white font-heading">Form Pengisian Profil Guru</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Guru dapat mengubah Nama, Foto, dan Daftar Murid kapan saja melalui menu ini.</p>
+            <button class="w-full bg-brand-navyLight border border-brand-gold/30 hover:border-brand-gold text-brand-gold font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="settings" class="w-4 h-4"></i> Buka Pengaturan & Input Murid
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

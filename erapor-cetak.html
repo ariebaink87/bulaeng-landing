@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BULAENG - e-Rapor PAUD/TK Digital Engine</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B132B',       /* Deep Luxurious Navy */
+              navyLight: '#1C2541',  /* Lighter Navy Container */
+              navyCard: '#131F3A',   /* Premium Card Background */
+              gold: '#D4AF37',      /* Classic Metallic Gold */
+              goldHover: '#B8962E', /* Rich Gold Hover */
+              light: '#FAFAFC',      /* Soft Neutral Background */
+            }
+          },
+          fontFamily: {
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '20px',
+            'xl': '16px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Grid Pattern Bulaeng */
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1C2541; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+    /* Custom Print CSS untuk Kertas Cetak A4 */
+    @media print {
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .bg-grid-pattern { background-image: none !important; }
+      .no-print { display: none !important; }
+      .print-container { padding: 0 !important; margin: 0 !important; box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; background: white !important; color: black !important; }
+      .page-break { page-break-before: always; }
+      .print-border-black { border-color: #000000 !important; }
+      .print-text-black { color: #000000 !important; }
+      .print-bg-gray { background-color: #f8fafc !important; }
+    }
+  </style>
+</head>
+<body class="font-body bg-brand-navy text-slate-100 min-h-screen py-6 px-4 sm:px-6 antialiased bg-grid-pattern">
+
+  <!-- BAR AKSI TOP LUXURY NAVY & GOLD (Tersembunyi saat Cetak) -->
+  <div class="max-w-4xl mx-auto mb-6 bg-brand-navyCard border border-brand-gold/30 p-4 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 no-print gold-glow">
+    
+    <div class="flex items-center gap-3">
+      <img src="assets/logo.png" alt="Logo BULAENG" class="h-9 w-auto object-contain brightness-110" onerror="this.style.display='none'">
+      <div>
+        <h2 class="font-bold font-heading text-sm text-white flex items-center gap-2">
+          <span>e-Rapor Digital Engine</span>
+          <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-2 py-0.5 rounded font-black">v1.0</span>
+        </h2>
+        <p class="text-xs text-slate-300">Pratinjau Lembar Laporan Hasil Belajar (LPP) Kurikulum Merdeka</p>
+      </div>
+    </div>
+
+    <!-- GRUP TOMBOL NAVIGASI & CETAK -->
+    <div class="flex items-center justify-end gap-2.5 w-full sm:w-auto">
+      
+      <!-- Tombol Cetak / PDF -->
+      <button onclick="window.print()" class="bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-black text-xs px-4 py-2.5 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+        <i data-lucide="printer" class="w-4 h-4 text-brand-navy"></i> Cetak / Simpan PDF
+      </button>
+
+      <!-- TOMBOL KEMBALI OTOMATIS BERDASARKAN ORIGIN / PARAMETER / REFERRER -->
+      <a id="btnKembali" href="index.html" class="inline-flex items-center gap-2 bg-brand-navyLight border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span id="labelKembali">Kembali ke Beranda</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- CONTAINER KERTAS RAPOR (A4 Look & Feel) -->
+  <div class="max-w-4xl mx-auto bg-brand-navyCard border border-brand-gold/30 rounded-2xl shadow-2xl p-8 sm:p-12 print-container space-y-8 gold-glow">
+    
+    <!-- KOP SURAT SEKOLAH -->
+    <div class="border-b-2 border-brand-gold/40 print-border-black pb-6 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <img src="assets/logo.png" alt="Logo Sekolah" class="h-16 w-auto object-contain brightness-110" onerror="this.src='https://via.placeholder.com/80?text=TK+LOGO'">
+        <div>
+          <h1 class="font-black text-lg sm:text-xl text-white print-text-black font-heading uppercase tracking-wide">[Nama Sekolah / TK Anda]</h1>
+          <p class="text-xs text-slate-300 print-text-black font-medium">Alamat Lengkap Sekolah, Kabupaten Sumbawa Barat, NTB</p>
+          <p class="text-[11px] text-brand-gold print-text-black mt-0.5">NPSN: [12345678] • Email: info@sekolah.sch.id</p>
+        </div>
+      </div>
+      <div class="text-right hidden sm:block">
+        <span class="bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider print-text-black">
+          Kurikulum Merdeka
+        </span>
+      </div>
+    </div>
+
+    <!-- HEADER DATA MURID -->
+    <div class="space-y-4">
+      <div class="text-center">
+        <h2 class="font-black text-base sm:text-lg text-white print-text-black font-heading uppercase underline decoration-brand-gold decoration-2 underline-offset-8">
+          LAPORAN CAPAIAN PEMBELAJARAN ANANDA
+        </h2>
+        <p class="text-xs font-bold text-brand-gold print-text-black mt-2">Tahun Ajaran 2025/2026 — Semester I (Ganjil)</p>
+      </div>
+
+      <div class="bg-brand-navyLight print-bg-gray rounded-2xl p-4 border border-brand-gold/20 print-border-black grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-medium">
+        <div>
+          <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">Nama Murid</span>
+          <span class="font-bold text-white print-text-black text-sm">[Nama Ananda / Murid]</span>
+        </div>
+        <div>
+          <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">NISN / ID</span>
+          <span class="font-bold text-slate-200 print-text-black">[0012345678]</span>
+        </div>
+        <div>
+          <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">Kelompok / Usia</span>
+          <span class="font-bold text-slate-200 print-text-black">[Kelompok B (5-6 Tahun)]</span>
+        </div>
+        <div>
+          <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">Wali Kelas</span>
+          <span class="font-bold text-slate-200 print-text-black">[Nama Guru Wali Kelas]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ELEMEN ELEMEN CAPAIAN PEMBELAJARAN -->
+    <div class="space-y-6">
+      
+      <!-- ELEMEN 1: Nilai Agama & Budi Pekerti -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 border-b border-brand-gold/20 print-border-black pb-2">
+          <div class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 print-text-black flex items-center justify-center font-bold text-xs">1</div>
+          <h3 class="font-bold text-sm text-white print-text-black font-heading">Nilai Agama dan Budi Pekerti</h3>
+        </div>
+        <p class="text-xs text-slate-300 print-text-black leading-relaxed text-justify">
+          Ananda [Nama Ananda] menunjukkan perkembangan yang <strong class="text-brand-gold print-text-black">Sangat Baik</strong> dalam mengenal ciptaan Tuhan. Ananda mampu mempraktikkan doa sebelum dan sesudah belajar secara mandiri, serta mulai membiasakan sikap santun, seperti mengucapkan salam dan terima kasih saat berinteraksi di kelas.
+        </p>
+      </div>
+
+      <!-- ELEMEN 2: Jati Diri -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 border-b border-brand-gold/20 print-border-black pb-2">
+          <div class="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/40 print-text-black flex items-center justify-center font-bold text-xs">2</div>
+          <h3 class="font-bold text-sm text-white print-text-black font-heading">Jati Diri</h3>
+        </div>
+        <p class="text-xs text-slate-300 print-text-black leading-relaxed text-justify">
+          Ananda mampu mengelola emosi diri dengan baik saat bermain kelompok. Memiliki rasa percaya diri yang tinggi dalam mencoba permainan motorik kasar baru, serta mampu menjaga kebersihan diri dan kerapian alat belajar setelah digunakan.
+        </p>
+      </div>
+
+      <!-- ELEMEN 3: Dasar-dasar Literasi, STEAM & Seni -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 border-b border-brand-gold/20 print-border-black pb-2">
+          <div class="w-6 h-6 rounded-lg bg-brand-gold/20 text-brand-gold border border-brand-gold/40 print-text-black flex items-center justify-center font-bold text-xs">3</div>
+          <h3 class="font-bold text-sm text-white print-text-black font-heading">Dasar-dasar Literasi, STEAM & Seni</h3>
+        </div>
+        <p class="text-xs text-slate-300 print-text-black leading-relaxed text-justify">
+          Ananda sangat antusias menyimak cerita dan mampu menceritakan kembali kisah sederhana dengan bahasanya sendiri. Dalam konsep matematika dasar, Ananda mampu mengelompokkan benda berdasarkan warna dan bentuk geometri, serta aktif mengekspresikan imajinasinya dalam karya seni mewarnai dan menyusun balok.
+        </p>
+      </div>
+
+      <!-- FOTO DOKUMENTASI UNGGULAN -->
+      <div class="pt-2">
+        <h4 class="font-bold text-xs text-white print-text-black font-heading mb-3">Dokumentasi Portofolio Unjuk Kerja Ananda:</h4>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="border border-brand-gold/20 print-border-black rounded-xl p-2 text-center bg-brand-navyLight print-bg-gray space-y-1.5">
+            <div class="aspect-video bg-brand-navy rounded-lg overflow-hidden border border-slate-700/60">
+              <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[10px] font-semibold text-slate-300 print-text-black">Aktivitas STEAM: Menyusun Pola Geometri</p>
+          </div>
+          <div class="border border-brand-gold/20 print-border-black rounded-xl p-2 text-center bg-brand-navyLight print-bg-gray space-y-1.5">
+            <div class="aspect-video bg-brand-navy rounded-lg overflow-hidden border border-slate-700/60">
+              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[10px] font-semibold text-slate-300 print-text-black">Circle Time: Literasi & Bercerita</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- REKAP KEHADIRAN -->
+      <div class="bg-brand-navyLight print-bg-gray border border-brand-gold/20 print-border-black rounded-xl p-4 flex justify-between items-center text-xs">
+        <span class="font-bold text-white print-text-black">Rekap Kehadiran Semester Ini:</span>
+        <div class="flex gap-4 sm:gap-6 font-semibold text-slate-300 print-text-black text-[11px] sm:text-xs">
+          <span>Hadir: <strong class="text-emerald-400 print-text-black">84 Hari</strong></span>
+          <span>Sakit: <strong class="text-amber-400 print-text-black">2 Hari</strong></span>
+          <span>Izin: <strong class="text-blue-400 print-text-black">1 Hari</strong></span>
+          <span>Alpa: <strong class="text-rose-400 print-text-black">0 Hari</strong></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TANDA TANGAN RAPOR -->
+    <div class="pt-10 grid grid-cols-2 gap-8 text-xs text-center font-medium">
+      <div>
+        <p class="text-slate-400 print-text-black mb-16">Sumbawa Barat, 20 Desember 2025<br>Orang Tua / Wali Murid,</p>
+        <p class="font-bold text-white print-text-black border-b border-slate-500 inline-block px-8 pb-1">( .................................................... )</p>
+      </div>
+
+      <div>
+        <p class="text-slate-400 print-text-black mb-16">Guru Wali Kelas,</p>
+        <p class="font-bold text-white print-text-black underline">[Nama Guru Wali Kelas]</p>
+        <p class="text-[10px] text-slate-400 print-text-black">NIP. 19850101 201001 2 001</p>
+      </div>
+
+      <div class="col-span-2 text-center pt-4">
+        <p class="text-slate-400 print-text-black mb-16">Mengetahui,<br>Kepala Sekolah [Nama Sekolah / TK Anda]</p>
+        <p class="font-bold text-white print-text-black underline">[Nama Kepsek, M.Pd.]</p>
+        <p class="text-[10px] text-slate-400 print-text-black">NIP. 19780202 200501 1 002</p>
+      </div>
+    </div>
+
+    <!-- FOOTER BULAENG VERIFICATION -->
+    <div class="border-t border-brand-gold/20 print-border-black pt-4 flex items-center justify-between text-[9px] text-slate-400 print-text-black">
+      <span>Dokumen ini diterbitkan secara sah melalui BULAENG SaaS EdTech Platform</span>
+      <span>Halaman 1 dari 1</span>
+    </div>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // SCRIPT OTOMATIS CERDAS: MENENTUKAN ORIGIN NAVIGASI
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnKembali = document.getElementById("btnKembali");
+      const labelKembali = document.getElementById("labelKembali");
+
+      // 1. Prioritas Utama: Cek Parameter URL (?from=guru / ?from=orangtua)
+      const urlParams = new URLSearchParams(window.location.search);
+      const origin = urlParams.get('from');
+
+      // 2. Prioritas Cadangan: Cek document.referrer
+      const referrer = document.referrer;
+
+      if (origin === 'guru' || referrer.includes("dashboard-guru.html")) {
+        btnKembali.href = "dashboard-guru.html";
+        labelKembali.textContent = "Kembali ke Dashboard Guru";
+      } else if (origin === 'orangtua' || referrer.includes("dashboard-orangtua.html")) {
+        btnKembali.href = "dashboard-orangtua.html";
+        labelKembali.textContent = "Kembali ke Dashboard Orang Tua";
+      } else if (origin === 'kepsek' || referrer.includes("dashboard-kepsek.html")) {
+        btnKembali.href = "dashboard-kepsek.html";
+        labelKembali.textContent = "Kembali ke Dashboard Kepsek";
+      } else {
+        btnKembali.href = "index.html";
+        labelKembali.textContent = "Kembali ke Beranda";
+      }
+    });
+  </script>
+</body>
+</html>

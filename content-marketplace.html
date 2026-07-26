@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BULAENG - Content Marketplace</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B132B',       /* Deep Luxurious Navy */
+              navyLight: '#1C2541',  /* Lighter Navy Container */
+              navyCard: '#131F3A',   /* Premium Card Background */
+              gold: '#D4AF37',      /* Classic Metallic Gold */
+              goldHover: '#B8962E', /* Rich Gold Hover */
+              light: '#FAFAFC',      /* Soft Neutral Background */
+            }
+          },
+          fontFamily: {
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '20px',
+            'xl': '16px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Grid Pattern Bulaeng */
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1C2541; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
+</head>
+<body class="h-full font-body bg-brand-navy text-slate-100 antialiased flex flex-col bg-grid-pattern">
+
+  <!-- NAVBAR MARKETPLACE LUXURY NAVY & GOLD -->
+  <header class="bg-brand-navyCard border-b border-brand-gold/30 text-white sticky top-0 z-50 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="assets/logo.png" alt="Logo BULAENG" class="h-10 w-auto brightness-110" onerror="this.style.display='none'">
+          <div>
+            <span class="text-lg font-black font-heading text-white tracking-wider block leading-none">BULAENG</span>
+            <span class="text-[9px] font-bold text-brand-gold uppercase tracking-widest block mt-0.5">CONTENT MARKETPLACE</span>
+          </div>
+        </a>
+
+        <!-- Search Bar Header -->
+        <div class="hidden md:flex flex-1 max-w-md mx-8">
+          <div class="relative w-full">
+            <input type="text" placeholder="Cari modul ajar, game HTML5, LKS, media ajar..." class="w-full bg-brand-navy border border-brand-gold/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-brand-gold">
+            <button class="absolute right-3 top-2.5 text-brand-gold">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+          <a href="#" class="hidden sm:inline-flex items-center gap-1.5 bg-brand-navyLight border border-brand-gold/40 text-brand-gold text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-md">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>Unggah Karya</span>
+          </a>
+
+          <!-- Tombol Kembali ke Beranda Universal -->
+          <a href="index.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-lg hover:shadow-brand-gold/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap">
+            <i data-lucide="home" class="w-4 h-4 text-brand-navy"></i>
+            <span class="hidden sm:inline">Kembali ke Beranda</span>
+            <span class="sm:hidden">Beranda</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO MARKETPLACE -->
+  <section class="bg-gradient-to-b from-brand-navyCard to-brand-navyLight text-white py-12 border-b border-brand-gold/30 gold-glow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <span class="inline-block text-[10px] uppercase font-bold tracking-widest bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-3 py-1 rounded-full">
+        📚 Pusat Perpustakaan & Marketplace Media Ajar
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-black font-heading text-white">
+        Temukan & Bagikan Konten Pembelajaran Berkualitas
+      </h1>
+      <p class="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+        Ribuan modul Kurikulum Merdeka, media interaktif, game edukasi, dan materi ajar buatan para pendidik hebat di seluruh Indonesia.
+      </p>
+
+      <!-- Quick Filter Pills -->
+      <div class="flex flex-wrap justify-center gap-2 pt-4">
+        <button class="bg-gradient-to-r from-brand-gold to-yellow-500 text-brand-navy text-xs font-bold px-4 py-2 rounded-full shadow-md">Semua Jenjang</button>
+        <button class="bg-brand-navy border border-brand-gold/30 text-slate-300 text-xs font-semibold px-4 py-2 rounded-full hover:border-brand-gold hover:text-white transition-all">PAUD / TK</button>
+        <button class="bg-brand-navy border border-brand-gold/30 text-slate-300 text-xs font-semibold px-4 py-2 rounded-full hover:border-brand-gold hover:text-white transition-all">SD / MI</button>
+        <button class="bg-brand-navy border border-brand-gold/30 text-slate-300 text-xs font-semibold px-4 py-2 rounded-full hover:border-brand-gold hover:text-white transition-all">SMP / MTs</button>
+        <button class="bg-brand-navy border border-brand-gold/30 text-slate-300 text-xs font-semibold px-4 py-2 rounded-full hover:border-brand-gold hover:text-white transition-all">SMA / SMK</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETPLACE CONTENT SECTION -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full space-y-8">
+    
+    <!-- Section Title -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-gold/20 pb-4">
+      <div>
+        <h2 class="text-xl font-bold font-heading text-white">Konten Terpopuler & Rekomendasi</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Materi ajar pilihan tinggi rating dari pendidik komunitas BULAENG</p>
+      </div>
+      <select class="bg-brand-navyCard border border-brand-gold/30 text-xs rounded-xl px-3.5 py-2 font-medium text-slate-200 focus:outline-none focus:border-brand-gold">
+        <option>Urutkan: Terpopuler</option>
+        <option>Terbaru</option>
+        <option>Rating Tertinggi</option>
+        <option>Gratis</option>
+      </select>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Item Card 1 -->
+      <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/20 overflow-hidden shadow-lg hover:border-brand-gold/60 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="h-40 bg-brand-navyLight relative flex items-center justify-center text-brand-gold font-bold text-4xl border-b border-brand-gold/10">
+            🎮
+            <span class="absolute top-3 left-3 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-bold px-2 py-0.5 rounded-md">Game HTML5</span>
+            <span class="absolute top-3 right-3 bg-brand-gold text-brand-navy text-[10px] font-black px-2 py-0.5 rounded-md">Gratis</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider">PAUD & SD Kelas 1</div>
+            <h3 class="font-bold text-white text-sm line-clamp-2 leading-snug group-hover:text-brand-gold transition-colors">Petualangan Matematika Dasar & Mengenal Angka Interaktif</h3>
+            <p class="text-xs text-slate-400 line-clamp-2">Game berbasis web HTML5 untuk melatih logika hitung awal siswa dengan animasi menarik.</p>
+          </div>
+        </div>
+        <div class="p-5 pt-0 space-y-3">
+          <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+            <span class="text-slate-400 text-[11px]">Ibu Rahmawati, S.Pd</span>
+            <span class="text-brand-gold font-bold flex items-center gap-1">★ 4.9</span>
+          </div>
+          <button class="w-full bg-brand-navy border border-brand-gold/40 hover:bg-brand-gold hover:text-brand-navy text-brand-gold font-bold text-xs py-2.5 rounded-xl transition-all shadow">
+            Unduh / Mainkan
+          </button>
+        </div>
+      </div>
+
+      <!-- Item Card 2 -->
+      <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/20 overflow-hidden shadow-lg hover:border-brand-gold/60 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="h-40 bg-brand-navyLight relative flex items-center justify-center text-brand-gold font-bold text-4xl border-b border-brand-gold/10">
+            📑
+            <span class="absolute top-3 left-3 bg-blue-500/20 text-blue-400 border border-blue-500/40 text-[10px] font-bold px-2 py-0.5 rounded-md">Modul Ajar PDF</span>
+            <span class="absolute top-3 right-3 bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded-md">Verified</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider">IPAS SD Kelas 4</div>
+            <h3 class="font-bold text-white text-sm line-clamp-2 leading-snug group-hover:text-brand-gold transition-colors">Modul Ajar IPAS: Ekosistem & Tumbuhan (Kurikulum Merdeka)</h3>
+            <p class="text-xs text-slate-400 line-clamp-2">Lengkap dengan Alur Tujuan Pembelajaran (ATP), rubrik asesmen, dan lembar aktivitas.</p>
+          </div>
+        </div>
+        <div class="p-5 pt-0 space-y-3">
+          <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+            <span class="text-slate-400 text-[11px]">Tim EdTech BULAENG</span>
+            <span class="text-brand-gold font-bold flex items-center gap-1">★ 5.0</span>
+          </div>
+          <button class="w-full bg-brand-navy border border-brand-gold/40 hover:bg-brand-gold hover:text-brand-navy text-brand-gold font-bold text-xs py-2.5 rounded-xl transition-all shadow">
+            Unduh Modul (PDF)
+          </button>
+        </div>
+      </div>
+
+      <!-- Item Card 3 -->
+      <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/20 overflow-hidden shadow-lg hover:border-brand-gold/60 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="h-40 bg-brand-navyLight relative flex items-center justify-center text-brand-gold font-bold text-4xl border-b border-brand-gold/10">
+            🎨
+            <span class="absolute top-3 left-3 bg-purple-500/20 text-purple-400 border border-purple-500/40 text-[10px] font-bold px-2 py-0.5 rounded-md">LKS Printable</span>
+            <span class="absolute top-3 right-3 bg-brand-gold text-brand-navy text-[10px] font-black px-2 py-0.5 rounded-md">Gratis</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider">Seni & Bahasa - PAUD</div>
+            <h3 class="font-bold text-white text-sm line-clamp-2 leading-snug group-hover:text-brand-gold transition-colors">Pack Lembar Mewarnai & Tracing Huruf Hijaiyah</h3>
+            <p class="text-xs text-slate-400 line-clamp-2">20 Lembar kerja siap cetak untuk stimulasi motorik halus anak usia 4-6 tahun.</p>
+          </div>
+        </div>
+        <div class="p-5 pt-0 space-y-3">
+          <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+            <span class="text-slate-400 text-[11px]">Pak Ahmad Fauzi</span>
+            <span class="text-brand-gold font-bold flex items-center gap-1">★ 4.8</span>
+          </div>
+          <button class="w-full bg-brand-navy border border-brand-gold/40 hover:bg-brand-gold hover:text-brand-navy text-brand-gold font-bold text-xs py-2.5 rounded-xl transition-all shadow">
+            Unduh Pack Cetak
+          </button>
+        </div>
+      </div>
+
+      <!-- Item Card 4 -->
+      <div class="bg-brand-navyCard rounded-2xl border border-brand-gold/20 overflow-hidden shadow-lg hover:border-brand-gold/60 transition-all flex flex-col justify-between group">
+        <div>
+          <div class="h-40 bg-brand-navyLight relative flex items-center justify-center text-brand-gold font-bold text-4xl border-b border-brand-gold/10">
+            🤖
+            <span class="absolute top-3 left-3 bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-bold px-2 py-0.5 rounded-md">Prompt AI</span>
+            <span class="absolute top-3 right-3 bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded-md">Verified</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider">Pendidik & Guru</div>
+            <h3 class="font-bold text-white text-sm line-clamp-2 leading-snug group-hover:text-brand-gold transition-colors">Kumpulan Prompt Sahabat AI untuk Rapor & Soal</h3>
+            <p class="text-xs text-slate-400 line-clamp-2">Panduan praktis menggunakan AI untuk membuat narasi deskripsi capaian siswa otomatis.</p>
+          </div>
+        </div>
+        <div class="p-5 pt-0 space-y-3">
+          <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+            <span class="text-slate-400 text-[11px]">Tim AI BULAENG</span>
+            <span class="text-brand-gold font-bold flex items-center gap-1">★ 4.9</span>
+          </div>
+          <button class="w-full bg-brand-navy border border-brand-gold/40 hover:bg-brand-gold hover:text-brand-navy text-brand-gold font-bold text-xs py-2.5 rounded-xl transition-all shadow">
+            Buka Panduan
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER MARKETPLACE LUXURY NAVY & GOLD -->
+  <footer class="bg-brand-navyCard text-slate-400 py-8 border-t border-brand-gold/30 text-xs text-center">
+    <p>&copy; 2026 BULAENG EdTech Indonesia - Content Marketplace & Learning Hub.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

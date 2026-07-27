@@ -88,17 +88,29 @@
     </div>
 
     <!-- GRUP TOMBOL NAVIGASI & CETAK -->
-    <div class="flex items-center justify-end gap-2.5 w-full sm:w-auto">
+    <div class="flex items-center justify-end gap-2.5 w-full sm:w-auto flex-wrap sm:flex-nowrap">
       
+      <!-- Tombol Kembali Langsung ke Presensi Murid -->
+      <a href="presensi-guru.html" class="inline-flex items-center gap-2 bg-brand-gold/20 border border-brand-gold/50 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md group">
+        <i data-lucide="user-check" class="w-4 h-4 text-brand-gold group-hover:text-brand-navy transition-colors"></i>
+        <span>Ke Presensi</span>
+      </a>
+
+      <!-- Tombol Kembali ke Dashboard Guru -->
+      <a href="dashboard-guru.html" class="inline-flex items-center gap-2 bg-brand-navyLight border border-slate-700 hover:border-brand-gold/40 text-slate-300 hover:text-white font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+        <span>Dashboard</span>
+      </a>
+
       <!-- Tombol Cetak / PDF -->
       <button onclick="window.print()" class="bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-black text-xs px-4 py-2.5 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
-        <i data-lucide="printer" class="w-4 h-4 text-brand-navy"></i> Cetak / Simpan PDF
+        <i data-lucide="printer" class="w-4 h-4 text-brand-navy"></i> Cetak / PDF
       </button>
 
-      <!-- TOMBOL KEMBALI OTOMATIS BERDASARKAN ORIGIN / PARAMETER / REFERRER -->
-      <a id="btnKembali" href="index.html" class="inline-flex items-center gap-2 bg-brand-navyLight border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md">
+      <!-- TOMBOL KEMBALI OTOMATIS DINAMIS -->
+      <a id="btnKembali" href="index.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-navyLight border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
-        <span id="labelKembali">Kembali ke Beranda</span>
+        <span id="labelKembali">Kembali</span>
       </a>
 
     </div>
@@ -112,9 +124,9 @@
       <div class="flex items-center gap-4">
         <img src="assets/logo.png" alt="Logo Sekolah" class="h-16 w-auto object-contain brightness-110" onerror="this.src='https://via.placeholder.com/80?text=TK+LOGO'">
         <div>
-          <h1 class="font-black text-lg sm:text-xl text-white print-text-black font-heading uppercase tracking-wide">[Nama Sekolah / TK Anda]</h1>
-          <p class="text-xs text-slate-300 print-text-black font-medium">Alamat Lengkap Sekolah, Kabupaten Sumbawa Barat, NTB</p>
-          <p class="text-[11px] text-brand-gold print-text-black mt-0.5">NPSN: [12345678] • Email: info@sekolah.sch.id</p>
+          <h1 class="font-black text-lg sm:text-xl text-white print-text-black font-heading uppercase tracking-wide">TK Bintang Bulakamba</h1>
+          <p class="text-xs text-slate-300 print-text-black font-medium">Jl. Pendidikan No. 12, Kecamatan Bulakamba, Kabupaten Brebes, Jawa Tengah</p>
+          <p class="text-[11px] text-brand-gold print-text-black mt-0.5">NPSN: 20389102 • Email: info@tkbintangbulakamba.sch.id</p>
         </div>
       </div>
       <div class="text-right hidden sm:block">
@@ -130,25 +142,25 @@
         <h2 class="font-black text-base sm:text-lg text-white print-text-black font-heading uppercase underline decoration-brand-gold decoration-2 underline-offset-8">
           LAPORAN CAPAIAN PEMBELAJARAN ANANDA
         </h2>
-        <p class="text-xs font-bold text-brand-gold print-text-black mt-2">Tahun Ajaran 2025/2026 — Semester I (Ganjil)</p>
+        <p class="text-xs font-bold text-brand-gold print-text-black mt-2">Tahun Ajaran 2026/2027 — Semester I (Ganjil)</p>
       </div>
 
       <div class="bg-brand-navyLight print-bg-gray rounded-2xl p-4 border border-brand-gold/20 print-border-black grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-medium">
         <div>
           <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">Nama Murid</span>
-          <span class="font-bold text-white print-text-black text-sm">[Nama Ananda / Murid]</span>
+          <span class="font-bold text-white print-text-black text-sm">Ananda Budi</span>
         </div>
         <div>
           <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">NISN / ID</span>
-          <span class="font-bold text-slate-200 print-text-black">[0012345678]</span>
+          <span class="font-bold text-slate-200 print-text-black">0012849102</span>
         </div>
         <div>
           <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">Kelompok / Usia</span>
-          <span class="font-bold text-slate-200 print-text-black">[Kelompok B (5-6 Tahun)]</span>
+          <span class="font-bold text-slate-200 print-text-black">Kelompok B2 (5-6 Tahun)</span>
         </div>
         <div>
           <span class="text-slate-400 print-text-black block text-[10px] uppercase font-bold">Wali Kelas</span>
-          <span class="font-bold text-slate-200 print-text-black">[Nama Guru Wali Kelas]</span>
+          <span class="font-bold text-slate-200 print-text-black">Ibu Siti Nurhaliza, S.Pd.</span>
         </div>
       </div>
     </div>
@@ -163,7 +175,7 @@
           <h3 class="font-bold text-sm text-white print-text-black font-heading">Nilai Agama dan Budi Pekerti</h3>
         </div>
         <p class="text-xs text-slate-300 print-text-black leading-relaxed text-justify">
-          Ananda [Nama Ananda] menunjukkan perkembangan yang <strong class="text-brand-gold print-text-black">Sangat Baik</strong> dalam mengenal ciptaan Tuhan. Ananda mampu mempraktikkan doa sebelum dan sesudah belajar secara mandiri, serta mulai membiasakan sikap santun, seperti mengucapkan salam dan terima kasih saat berinteraksi di kelas.
+          Ananda <strong class="text-white print-text-black">Ananda Budi</strong> menunjukkan perkembangan yang <strong class="text-brand-gold print-text-black">Sangat Baik</strong> dalam mengenal ciptaan Tuhan. Ananda mampu mempraktikkan doa sebelum dan sesudah belajar secara mandiri, serta mulai membiasakan sikap santun, seperti mengucapkan salam dan terima kasih saat berinteraksi di kelas.
         </p>
       </div>
 
@@ -224,19 +236,19 @@
     <!-- TANDA TANGAN RAPOR -->
     <div class="pt-10 grid grid-cols-2 gap-8 text-xs text-center font-medium">
       <div>
-        <p class="text-slate-400 print-text-black mb-16">Sumbawa Barat, 20 Desember 2025<br>Orang Tua / Wali Murid,</p>
+        <p class="text-slate-400 print-text-black mb-16">Brebes, 20 Desember 2026<br>Orang Tua / Wali Murid,</p>
         <p class="font-bold text-white print-text-black border-b border-slate-500 inline-block px-8 pb-1">( .................................................... )</p>
       </div>
 
       <div>
         <p class="text-slate-400 print-text-black mb-16">Guru Wali Kelas,</p>
-        <p class="font-bold text-white print-text-black underline">[Nama Guru Wali Kelas]</p>
+        <p class="font-bold text-white print-text-black underline">Ibu Siti Nurhaliza, S.Pd.</p>
         <p class="text-[10px] text-slate-400 print-text-black">NIP. 19850101 201001 2 001</p>
       </div>
 
       <div class="col-span-2 text-center pt-4">
-        <p class="text-slate-400 print-text-black mb-16">Mengetahui,<br>Kepala Sekolah [Nama Sekolah / TK Anda]</p>
-        <p class="font-bold text-white print-text-black underline">[Nama Kepsek, M.Pd.]</p>
+        <p class="text-slate-400 print-text-black mb-16">Mengetahui,<br>Kepala Sekolah TK Bintang Bulakamba</p>
+        <p class="font-bold text-white print-text-black underline">Drs. H. Bustanil, M.Pd.</p>
         <p class="text-[10px] text-slate-400 print-text-black">NIP. 19780202 200501 1 002</p>
       </div>
     </div>
@@ -252,7 +264,7 @@
   <script>
     lucide.createIcons();
 
-    // SCRIPT OTOMATIS CERDAS: MENENTUKAN ORIGIN NAVIGASI
+    // SCRIPT OTOMATIS CERDAS: MENENTUKAN ORIGIN NAVIGASI DINAMIS
     document.addEventListener("DOMContentLoaded", function () {
       const btnKembali = document.getElementById("btnKembali");
       const labelKembali = document.getElementById("labelKembali");
@@ -264,18 +276,18 @@
       // 2. Prioritas Cadangan: Cek document.referrer
       const referrer = document.referrer;
 
-      if (origin === 'guru' || referrer.includes("dashboard-guru.html")) {
-        btnKembali.href = "dashboard-guru.html";
-        labelKembali.textContent = "Kembali ke Dashboard Guru";
+      if (origin === 'guru' || referrer.includes("dashboard-guru.html") || referrer.includes("presensi-guru.html")) {
+        btnKembali.href = "presensi-guru.html";
+        labelKembali.textContent = "Ke Presensi";
       } else if (origin === 'orangtua' || referrer.includes("dashboard-orangtua.html")) {
         btnKembali.href = "dashboard-orangtua.html";
-        labelKembali.textContent = "Kembali ke Dashboard Orang Tua";
+        labelKembali.textContent = "Ke Orang Tua";
       } else if (origin === 'kepsek' || referrer.includes("dashboard-kepsek.html")) {
         btnKembali.href = "dashboard-kepsek.html";
-        labelKembali.textContent = "Kembali ke Dashboard Kepsek";
+        labelKembali.textContent = "Ke Kepsek";
       } else {
-        btnKembali.href = "index.html";
-        labelKembali.textContent = "Kembali ke Beranda";
+        btnKembali.href = "dashboard-guru.html";
+        labelKembali.textContent = "Ke Dashboard";
       }
     });
   </script>

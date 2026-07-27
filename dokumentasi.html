@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dokumentasi & Portofolio - BULAENG Teacher Portal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#111B38',       /* Deep Luxurious Navy */
+              navyLight: '#1B2A54',  /* Lighter Navy Container */
+              navyCard: '#162244',   /* Premium Card Background */
+              gold: '#D4AF37',      /* Classic Metallic Gold */
+              goldHover: '#B8962E', /* Rich Gold Hover */
+              softGrey: '#F8FAFC',   /* Soft Neutral Background */
+              darkGrey: '#0F172A',
+              lightGrey: '#64748B',
+              success: '#10B981',
+              error: '#EF4444',
+              warning: '#F59E0B',
+              info: '#3B82F6'
+            }
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'card': '18px',
+            'btn': '12px',
+            'input': '10px',
+            'pill': '999px'
+          },
+          boxShadow: {
+            'soft': '0 10px 30px rgba(17, 27, 56, 0.04)',
+            'card': '0 4px 20px rgba(0, 0, 0, 0.15)',
+            'gold-glow': '0 0 25px rgba(212, 175, 55, 0.25)',
+            'toast': '0 20px 25px -5px rgba(0, 0, 0, 0.2)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1B2A54; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
+</head>
+<body class="h-full font-body bg-brand-navy text-slate-100 antialiased flex flex-col bg-grid-pattern selection:bg-brand-gold selection:text-brand-navy">
+
+  <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="bg-brand-navyCard border-b border-white/10 h-20 sticky top-0 z-40 flex items-center justify-between px-6 shadow-xl">
+    <div class="flex items-center gap-6">
+      <a href="dashboard-guru.html" class="flex items-center gap-4">
+        <img src="assets/logo.png" alt="Logo BULAENG" class="w-12 h-12 object-contain drop-shadow-lg">
+        <div class="flex flex-col">
+          <span class="font-heading font-extrabold text-lg leading-none text-white tracking-wider">BULAENG</span>
+          <span class="text-[9px] font-bold text-brand-gold tracking-widest uppercase mt-1">Teacher Portal</span>
+        </div>
+      </a>
+
+      <div class="h-6 w-[1px] bg-white/10 hidden sm:block"></div>
+      
+      <div class="hidden sm:flex items-center gap-2.5 bg-brand-navyLight px-3.5 py-1.5 rounded-btn border border-white/10 text-xs font-semibold text-slate-300">
+        <i data-lucide="camera" class="w-4 h-4 text-brand-gold"></i>
+        <span>Pusat Dokumentasi Terpadu</span>
+        <span class="text-white/20">•</span>
+        <span class="text-brand-gold">TK Bintang Bulakamba</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-brand-gold/20 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-navy font-bold text-xs px-3.5 py-2.5 rounded-btn transition-all">
+        <i data-lucide="globe" class="w-4 h-4"></i>
+        <span>Website Utama Sekolah</span>
+      </a>
+
+      <a href="dashboard-guru.html" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium text-xs px-4 py-2.5 rounded-btn border border-white/10 shadow-soft transition-all">
+        <i data-lucide="arrow-left" class="w-4 h-4 text-brand-gold"></i>
+        <span class="hidden sm:inline">Beranda</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- SIDEBAR NAVIGATION MENU -->
+    <aside class="w-72 bg-brand-navyCard border-r border-white/10 text-slate-300 flex flex-col justify-between p-6 flex-shrink-0 hidden md:flex">
+      <div class="space-y-6">
+        <div>
+          <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Menu Utama</p>
+          <nav class="space-y-1.5">
+            <a href="dashboard-guru.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs">
+              <i data-lucide="layout-dashboard" class="w-4.5 h-4.5"></i>
+              <span>Beranda Guru</span>
+            </a>
+            <a href="presensi-guru.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs">
+              <i data-lucide="user-check" class="w-4.5 h-4.5"></i>
+              <span>Presensi Murid</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="pt-2 border-t border-white/5">
+          <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Dokumentasi</p>
+          <nav class="space-y-1.5">
+            <a href="dokumentasi.html" class="flex items-center gap-3.5 px-4 py-3 bg-white/10 text-brand-gold border-l-4 border-brand-gold font-bold rounded-r-btn transition-all text-xs">
+              <i data-lucide="camera" class="w-4.5 h-4.5 text-brand-gold"></i>
+              <span>Pusat Galeri Foto</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="pt-2 border-t border-white/5">
+          <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Jalur Distribusi Foto</p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 bg-brand-navyLight border border-white/10 rounded-btn flex items-center gap-2 text-[11px]">
+              <i data-lucide="users" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span>Konek ke <strong>Portal Orang Tua</strong> & e-Rapor</span>
+            </div>
+            <div class="p-3 bg-brand-navyLight border border-white/10 rounded-btn flex items-center gap-2 text-[11px]">
+              <i data-lucide="globe" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <span>Konek ke <strong>Website Sekolah</strong> & Publik</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/5 rounded-card p-4 border border-white/10 text-xs">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2.5 h-2.5 rounded-pill bg-brand-success animate-pulse"></span>
+          <span class="font-semibold text-white text-xs">Cloud Sync Active</span>
+        </div>
+        <p class="text-[11px] text-brand-lightGrey">Kapasitas Media Terhubung</p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 overflow-y-auto p-6 lg:p-8 space-y-8">
+
+      <!-- TAB SELECTION: KEGIATAN ANAK VS KEGIATAN SEKOLAH -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-4 gap-4 flex-wrap">
+        <div class="flex items-center gap-2 bg-brand-navyLight p-1.5 rounded-btn border border-white/10">
+          <button id="tab-anak" onclick="switchCategory('anak')" class="px-5 py-2.5 rounded-input text-xs font-bold bg-brand-gold text-brand-navy shadow-md transition-all flex items-center gap-2">
+            <i data-lucide="baby" class="w-4 h-4"></i>
+            <span>Dokumentasi Kegiatan Anak (Portofolio)</span>
+          </button>
+          <button id="tab-sekolah" onclick="switchCategory('sekolah')" class="px-5 py-2.5 rounded-input text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <i data-lucide="building-2" class="w-4 h-4"></i>
+            <span>Dokumentasi Kegiatan Sekolah & Guru</span>
+          </button>
+        </div>
+
+        <span id="tab-indicator" class="text-xs text-brand-lightGrey font-medium">
+          Menampilkan portofolio yang terhubung ke e-Rapor & Dashboard Orang Tua
+        </span>
+      </div>
+
+      <!-- HERO UPLOAD CENTER -->
+      <div class="bg-brand-navyCard border border-brand-gold/30 rounded-card p-6 shadow-gold-glow space-y-6">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div>
+            <span id="upload-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-brand-gold/20 text-brand-gold text-xs font-bold border border-brand-gold/30 mb-2">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> PORTOFOLIO ANAK
+            </span>
+            <h1 id="upload-title" class="text-xl font-heading font-extrabold text-white">Unggah Foto Kegiatan Harian Murid</h1>
+            <p id="upload-desc" class="text-xs text-brand-lightGrey mt-1">Foto ini akan langsung terhubung ke Dashboard Orang Tua dan siap digunakan untuk e-Rapor Digital.</p>
+          </div>
+          <button onclick="simpanDokumentasi()" class="bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs px-6 py-3 rounded-btn shadow-md transition-all flex items-center gap-2 shrink-0">
+            <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+            <span>Unggah & Publikasikan</span>
+          </button>
+        </div>
+
+        <!-- FORM INPUT DOKUMENTASI -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- DRAG & DROP PHOTO AREA -->
+          <div class="lg:col-span-5 border-2 border-dashed border-brand-gold/40 hover:border-brand-gold bg-brand-navyLight rounded-card p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all group relative overflow-hidden" onclick="triggerFileInput()">
+            <div class="w-12 h-12 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <i data-lucide="image-plus" class="w-6 h-6"></i>
+            </div>
+            <p class="text-xs font-bold text-white mb-1">Klik / Tarik Banyak Foto Sekaligus</p>
+            <p class="text-[10px] text-brand-lightGrey">Mendukung pengunggahan massal (Batch Upload MP4, JPG, PNG)</p>
+          </div>
+
+          <!-- METADATA FORM DYNAMIC -->
+          <div class="lg:col-span-7 space-y-4">
+            
+            <!-- FORM KEGIATAN ANAK -->
+            <div id="form-anak-group" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Pilih Murid (Tagging):</label>
+                <select id="select-murid" class="w-full bg-brand-navy border border-white/20 rounded-input p-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                  <option value="Semua Murid">Semua Murid (Foto Kelompok)</option>
+                  <option value="Ananda Budi">Ananda Budi</option>
+                  <option value="Citra Putri">Citra Putri</option>
+                  <option value="Dewa Rizal">Dewa Rizal</option>
+                  <option value="Elina Lestari">Elina Lestari</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Elemen Capaian Pembelajaran:</label>
+                <select class="w-full bg-brand-navy border border-white/20 rounded-input p-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                  <option value="cp1">🟢 Nilai Agama & Budi Pekerti</option>
+                  <option value="cp2">🔵 Jati Diri</option>
+                  <option value="cp3" selected>🟡 Dasar Literasi, STEAM & Seni</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- FORM KEGIATAN SEKOLAH (Hidden secara default) -->
+            <div id="form-sekolah-group" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Kategori Kegiatan Sekolah:</label>
+                <select class="w-full bg-brand-navy border border-white/20 rounded-input p-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+                  <option value="rapat">Rapat Wali Murid & Komite</option>
+                  <option value="perpisahan">Perpisahan & Pentas Seni</option>
+                  <option value="pelatihan">Pelatihan / Workshop Guru</option>
+                  <option value="outbound">Outbound & Kunjungan Edukasi</option>
+                  <option value="lomba">Lomba & Prestasi Sekolah</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Judul Acara / Kegiatan:</label>
+                <input type="text" placeholder="Contoh: Rapat Komite Awal Semester..." class="w-full bg-brand-navy border border-white/20 rounded-input p-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+              </div>
+            </div>
+
+            <!-- Catatan / Deskripsi Foto -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-[11px] font-bold text-slate-300 uppercase">Deskripsi / Catatan Observasi:</label>
+                <button onclick="generateAICaption()" class="text-[10px] font-bold text-brand-gold hover:underline flex items-center gap-1">
+                  <i data-lucide="sparkles" class="w-3 h-3"></i> AI Auto-Caption
+                </button>
+              </div>
+              <textarea id="doc-note" rows="2" placeholder="Tuliskan keterangan singkat mengenai dokumentasi yang diunggah..." class="w-full bg-brand-navy border border-white/20 rounded-input p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition-all"></textarea>
+            </div>
+
+            <!-- MULTI-PUBLISHING DESTINATION SWITCHES -->
+            <div id="publish-options-anak" class="flex flex-wrap items-center gap-4 bg-brand-navyLight p-3 rounded-input border border-white/10 text-xs">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-gold">
+                <span>Tampilkan di <strong>Dashboard Orang Tua</strong></span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-gold">
+                <span>Unggulkan untuk <strong>e-Rapor Digital</strong></span>
+              </label>
+            </div>
+
+            <div id="publish-options-sekolah" class="flex flex-wrap items-center gap-4 bg-brand-navyLight p-3 rounded-input border border-white/10 text-xs hidden">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-gold">
+                <span>Publikasikan ke <strong>Website Utama Sekolah</strong></span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-gold">
+                <span>Tampilkan di <strong>Pengumuman Portal Orang Tua</strong></span>
+              </label>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FILTER TOOLBAR -->
+      <div class="bg-brand-navyCard p-4 rounded-card border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="relative w-full md:w-80">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input type="text" placeholder="Cari dokumentasi foto..." class="w-full pl-10 pr-4 py-2 text-xs rounded-input border border-white/20 bg-brand-navy text-white focus:outline-none focus:border-brand-gold transition-all">
+        </div>
+
+        <div id="filter-tabs" class="flex items-center gap-2 w-full md:w-auto overflow-x-auto">
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-gold text-brand-navy shadow-sm">Semua</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Ananda Budi</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Citra Putri</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Terpilih e-Rapor ⭐</button>
+        </div>
+      </div>
+
+      <!-- GALLERY FEED GRID (DOKUMENTASI FOTO) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-container">
+        
+        <!-- CARD FOTO 1: KEGIATAN ANAK -->
+        <div class="card-item-anak bg-brand-navyCard rounded-card border border-white/10 overflow-hidden hover:border-brand-gold/50 transition-all group flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-video bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=500" alt="Dokumentasi STEAM" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <span class="absolute top-3 left-3 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2.5 py-1 rounded-pill">
+                🟡 STEAM & Seni
+              </span>
+              <span class="absolute top-3 right-3 bg-emerald-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-pill flex items-center gap-1">
+                <i data-lucide="users" class="w-3 h-3"></i> Portal Orang Tua
+              </span>
+            </div>
+            <div class="p-5 space-y-3">
+              <div class="flex items-center justify-between text-[11px] text-brand-lightGrey">
+                <span class="font-bold text-white">Ananda Budi</span>
+                <span>27 Juli 2026</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Ananda Budi menunjukkan ketelitian tinggi saat menyusun balok geometri sesuai susunan pola warna secara mandiri.
+              </p>
+            </div>
+          </div>
+          <div class="p-4 bg-brand-navyLight border-t border-white/5 flex items-center justify-between">
+            <button onclick="showToast('Tersambung ke e-Rapor Digital', 'success')" class="text-[11px] font-bold text-brand-gold hover:underline flex items-center gap-1">
+              <i data-lucide="star" class="w-3.5 h-3.5"></i> Terpilih e-Rapor
+            </button>
+            <button onclick="showToast('Foto berhasil dihapus', 'info')" class="text-[11px] text-rose-400 hover:underline">Hapus</button>
+          </div>
+        </div>
+
+        <!-- CARD FOTO 2: KEGIATAN SEKOLAH/GURU -->
+        <div class="card-item-sekolah bg-brand-navyCard rounded-card border border-white/10 overflow-hidden hover:border-brand-gold/50 transition-all group flex flex-col justify-between hidden">
+          <div>
+            <div class="relative aspect-video bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=500" alt="Rapat Wali Murid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <span class="absolute top-3 left-3 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2.5 py-1 rounded-pill">
+                🏛️ Rapat Wali Murid
+              </span>
+              <span class="absolute top-3 right-3 bg-blue-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-pill flex items-center gap-1">
+                <i data-lucide="globe" class="w-3 h-3"></i> Web Sekolah
+              </span>
+            </div>
+            <div class="p-5 space-y-3">
+              <div class="flex items-center justify-between text-[11px] text-brand-lightGrey">
+                <span class="font-bold text-white">TK Bintang Bulakamba</span>
+                <span>20 Juli 2026</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Rapat Koordinasi Komite Sekolah & Wali Murid Awal Semester Ganjil 2026/2027 mengenai Program Unggulan PAUD.
+              </p>
+            </div>
+          </div>
+          <div class="p-4 bg-brand-navyLight border-t border-white/5 flex items-center justify-between">
+            <a href="index.html" target="_blank" class="text-[11px] font-bold text-brand-gold hover:underline flex items-center gap-1">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Lihat di Web Sekolah
+            </a>
+            <button onclick="showToast('Foto berhasil dihapus', 'info')" class="text-[11px] text-rose-400 hover:underline">Hapus</button>
+          </div>
+        </div>
+
+        <!-- CARD FOTO 3: KEGIATAN SEKOLAH (PERPISAHAN) -->
+        <div class="card-item-sekolah bg-brand-navyCard rounded-card border border-white/10 overflow-hidden hover:border-brand-gold/50 transition-all group flex flex-col justify-between hidden">
+          <div>
+            <div class="relative aspect-video bg-slate-900 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=500" alt="Pentas Seni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <span class="absolute top-3 left-3 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2.5 py-1 rounded-pill">
+                🎭 Pentas Seni & Perpisahan
+              </span>
+              <span class="absolute top-3 right-3 bg-blue-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-pill flex items-center gap-1">
+                <i data-lucide="globe" class="w-3 h-3"></i> Web Sekolah
+              </span>
+            </div>
+            <div class="p-5 space-y-3">
+              <div class="flex items-center justify-between text-[11px] text-brand-lightGrey">
+                <span class="font-bold text-white">TK Bintang Bulakamba</span>
+                <span>15 Juni 2026</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Pentas Seni Tari Tradisional & Pelepasan Siswa Kelompok B Tahun Ajaran 2025/2026.
+              </p>
+            </div>
+          </div>
+          <div class="p-4 bg-brand-navyLight border-t border-white/5 flex items-center justify-between">
+            <a href="index.html" target="_blank" class="text-[11px] font-bold text-brand-gold hover:underline flex items-center gap-1">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Lihat di Web Sekolah
+            </a>
+            <button onclick="showToast('Foto berhasil dihapus', 'info')" class="text-[11px] text-rose-400 hover:underline">Hapus</button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // TOAST NOTIFICATION SYSTEM
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      let bgClass = "bg-brand-navy text-white border-brand-gold";
+      let icon = "check-circle-2";
+
+      if (type === 'success') {
+          bgClass = "bg-brand-navy text-white border-brand-success";
+          icon = "check-circle-2";
+      } else if (type === 'info') {
+          bgClass = "bg-brand-navy text-white border-brand-info";
+          icon = "info";
+      }
+
+      toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-card border shadow-toast transform transition-all duration-300 opacity-0 translate-y-[-10px] ${bgClass}`;
+      toast.innerHTML = `
+          <i data-lucide="${icon}" class="w-5 h-5 text-brand-gold"></i>
+          <span class="text-xs font-semibold">${message}</span>
+      `;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-[-10px]'), 10);
+      setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-[-10px]');
+          setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // SWITCH KATEGORI DOKUMENTASI (ANAK VS SEKOLAH)
+    function switchCategory(type) {
+      const tabAnak = document.getElementById('tab-anak');
+      const tabSekolah = document.getElementById('tab-sekolah');
+      const indicator = document.getElementById('tab-indicator');
+
+      const badge = document.getElementById('upload-badge');
+      const title = document.getElementById('upload-title');
+      const desc = document.getElementById('upload-desc');
+
+      const formAnak = document.getElementById('form-anak-group');
+      const formSekolah = document.getElementById('form-sekolah-group');
+
+      const pubAnak = document.getElementById('publish-options-anak');
+      const pubSekolah = document.getElementById('publish-options-sekolah');
+
+      const itemsAnak = document.querySelectorAll('.card-item-anak');
+      const itemsSekolah = document.querySelectorAll('.card-item-sekolah');
+      const filterTabs = document.getElementById('filter-tabs');
+
+      if (type === 'anak') {
+        tabAnak.className = "px-5 py-2.5 rounded-input text-xs font-bold bg-brand-gold text-brand-navy shadow-md transition-all flex items-center gap-2";
+        tabSekolah.className = "px-5 py-2.5 rounded-input text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2";
+        indicator.innerText = "Menampilkan portofolio yang terhubung ke e-Rapor & Dashboard Orang Tua";
+
+        badge.innerHTML = `<i data-lucide="sparkles" class="w-3.5 h-3.5"></i> PORTOFOLIO ANAK`;
+        title.innerText = "Unggah Foto Kegiatan Harian Murid";
+        desc.innerText = "Foto ini akan langsung terhubung ke Dashboard Orang Tua dan siap digunakan untuk e-Rapor Digital.";
+
+        formAnak.classList.remove('hidden');
+        formSekolah.classList.add('hidden');
+
+        pubAnak.classList.remove('hidden');
+        pubSekolah.classList.add('hidden');
+
+        itemsAnak.forEach(el => el.classList.remove('hidden'));
+        itemsSekolah.forEach(el => el.classList.add('hidden'));
+
+        filterTabs.innerHTML = `
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-gold text-brand-navy shadow-sm">Semua</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Ananda Budi</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Citra Putri</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Terpilih e-Rapor ⭐</button>
+        `;
+      } else {
+        tabSekolah.className = "px-5 py-2.5 rounded-input text-xs font-bold bg-brand-gold text-brand-navy shadow-md transition-all flex items-center gap-2";
+        tabAnak.className = "px-5 py-2.5 rounded-input text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2";
+        indicator.innerText = "Menampilkan arsip foto agenda sekolah, perpisahan, rapat, & galeri publik";
+
+        badge.innerHTML = `<i data-lucide="building-2" class="w-3.5 h-3.5"></i> AGENDA SEKOLAH & GURU`;
+        title.innerText = "Unggah Dokumentasi Kegiatan Sekolah & Guru";
+        desc.innerText = "Foto ini difokuskan untuk arsip sekolah, publikasi Website Utama, serta pengumuman wali murid.";
+
+        formAnak.classList.add('hidden');
+        formSekolah.classList.remove('hidden');
+
+        pubAnak.classList.add('hidden');
+        pubSekolah.classList.remove('hidden');
+
+        itemsAnak.forEach(el => el.classList.add('hidden'));
+        itemsSekolah.forEach(el => el.classList.remove('hidden'));
+
+        filterTabs.innerHTML = `
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-gold text-brand-navy shadow-sm">Semua Agenda</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Rapat Wali Murid</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Pentas Seni</button>
+          <button class="px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-white">Pelatihan Guru</button>
+        `;
+      }
+      lucide.createIcons();
+    }
+
+    function generateAICaption() {
+      const noteField = document.getElementById('doc-note');
+      noteField.value = "Dokumentasi kegiatan berlangsung dengan lancar, tertib, dan mendapat antusiasme tinggi dari seluruh peserta.";
+      showToast("Deskripsi AI berhasil dibuat!", "success");
+    }
+
+    function triggerFileInput() {
+      showToast("Membuka Galeri Foto untuk Pengunggahan Massal...", "info");
+    }
+
+    function simpanDokumentasi() {
+      showToast("Dokumentasi foto & saluran distribusi berhasil disimpan!", "success");
+    }
+  </script>
+</body>
+</html>

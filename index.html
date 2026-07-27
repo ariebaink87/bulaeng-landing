@@ -286,31 +286,45 @@
         </div>
 
         <div class="lg:col-span-5 flex flex-col items-center justify-center gap-8">
-          <div class="w-full max-w-md bg-gradient-to-b from-brand-navyCard to-brand-navy border border-brand-gold/40 rounded-3xl p-6 sm:p-7 shadow-2xl relative overflow-hidden transition-all hover:border-brand-gold/80">
+          
+          <!-- KARTU FOUNDER & CEO HORIZONTAL ELEGANT -->
+          <div class="w-full max-w-2xl bg-brand-navyCard/80 border border-brand-gold/40 rounded-3xl p-6 sm:p-7 shadow-2xl relative overflow-hidden backdrop-blur-xl transition-all hover:border-brand-gold/80">
             <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl"></div>
             
-            <div class="flex items-center gap-5 border-b border-slate-800 pb-5 mb-5">
-              <img src="assets/founder_baru.png" alt="Bustanil Arifin" class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border-2 border-brand-gold/60 shadow-lg flex-shrink-0">
-              <div class="flex flex-col justify-center">
-                <p class="text-lg sm:text-xl text-white font-black font-heading leading-tight">Bustanil Arifin</p>
+            <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+              
+              <!-- Sisi Kiri: Foto + Nama & Jabatan di Bawahnya -->
+              <div class="flex flex-col items-center text-center flex-shrink-0">
+                <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl border-2 border-brand-gold/80 overflow-hidden shadow-xl mb-3">
+                  <img src="assets/bustanil-founder.png" alt="Bustanil Arifin - Founder & CEO BULAENG" class="w-full h-full object-cover object-top">
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-white font-heading leading-tight">Bustanil Arifin</h3>
                 <p class="text-xs sm:text-sm text-brand-gold font-semibold mt-1">Founder & CEO BULAENG</p>
               </div>
-            </div>
 
-            <div class="space-y-4">
-              <p class="text-xs sm:text-sm text-slate-200 italic leading-relaxed">
-                "Kami tidak membangun sekadar platform digital. Kami membangun jembatan agar setiap anak memperoleh pengalaman belajar yang lebih baik, setiap guru mengajar dengan lebih mudah, dan setiap orang tua dapat menyaksikan tumbuh kembang anaknya dengan bangga."
-              </p>
+              <!-- Pembatas Vertikal (Tampil di Layar Desktop) -->
+              <div class="hidden md:block w-px h-36 bg-gradient-to-b from-transparent via-brand-gold/40 to-transparent"></div>
               
-              <div class="pt-3 text-center border-t border-brand-gold/15 flex flex-col items-center gap-1">
-                <span class="text-xs font-black tracking-widest text-brand-gold uppercase">"ILMU ADALAH EMAS"</span>
-                <span class="text-[9px] bg-brand-gold/10 text-brand-gold border border-brand-gold/30 px-2.5 py-0.5 rounded-md font-semibold mt-0.5">Bahasa Samawa: BULAENG = EMAS</span>
+              <!-- Pembatas Horizontal (Tampil di HP) -->
+              <div class="block md:hidden w-full h-px bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent my-1"></div>
+
+              <!-- Sisi Kanan: Quote & Slogan -->
+              <div class="flex-1 flex flex-col justify-center space-y-4 text-center md:text-left">
+                <p class="text-xs sm:text-sm text-slate-200 italic leading-relaxed">
+                  "Kami tidak membangun sekadar platform digital. Kami membangun jembatan agar setiap anak memperoleh pengalaman belajar yang lebih baik, setiap guru mengajar dengan lebih mudah, dan setiap orang tua dapat menyaksikan tumbuh kembang anaknya dengan bangga."
+                </p>
+                
+                <div class="pt-2 border-t border-brand-gold/15 flex flex-col items-center md:items-start gap-1">
+                  <span class="text-xs font-black tracking-widest text-brand-gold uppercase font-heading">"ILMU ADALAH EMAS"</span>
+                  <span class="text-[10px] bg-brand-gold/10 text-brand-gold border border-brand-gold/30 px-2.5 py-0.5 rounded-md font-semibold mt-0.5">Bahasa Samawa: BULAENG = EMAS</span>
+                </div>
               </div>
+
             </div>
           </div>
 
           <!-- Video Container (Sudah Diintegrasikan dengan Google Drive) -->
-          <div class="w-full max-w-md">
+          <div class="w-full max-w-2xl">
             <div class="group relative rounded-3xl overflow-hidden shadow-2xl border-2 border-brand-gold/50 bg-brand-navyCard p-2 backdrop-blur-xl">
               <div class="relative rounded-2xl overflow-hidden aspect-video bg-black">
                 <iframe 
@@ -329,6 +343,7 @@
               </div>
             </div>
           </div>
+
         </div>
 
       </div>

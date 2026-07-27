@@ -79,7 +79,7 @@
   <header class="bg-brand-navyCard border-b border-white/10 h-20 sticky top-0 z-40 flex items-center justify-between px-6 shadow-xl">
     
     <div class="flex items-center gap-6">
-      <!-- Logo BULAENG (56px Lux Standard) -->
+      <!-- Logo BULAENG -->
       <a href="dashboard-guru.html" class="flex items-center gap-4">
         <img src="assets/logo.png" alt="Logo BULAENG" class="w-12 h-12 object-contain drop-shadow-lg">
         <div class="flex flex-col">
@@ -127,11 +127,10 @@
 
   <div class="flex flex-1 overflow-hidden">
 
-    <!-- SIDEBAR NAVIGATION MENU (Microsoft Teams & Notion Hybrid) -->
+    <!-- SIDEBAR NAVIGATION MENU -->
     <aside class="w-72 bg-brand-navyCard border-r border-white/10 text-slate-300 flex flex-col justify-between p-6 flex-shrink-0 hidden md:flex">
       
       <div class="space-y-6">
-        <!-- MENU UTAMA -->
         <div>
           <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Menu Utama</p>
           <nav class="space-y-1.5">
@@ -146,40 +145,28 @@
           </nav>
         </div>
 
-        <!-- AKADEMIK & DOKUMENTASI -->
         <div class="pt-2 border-t border-white/5">
           <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Akademik & Dokumentasi</p>
           <nav class="space-y-1.5">
-            <!-- Dokumentasi (Soon) -->
-            <a href="#" onclick="showToast('Modul Dokumentasi Portofolio Kegiatan sedang disiapkan!', 'info'); return false;" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs group">
-              <i data-lucide="camera" class="w-4.5 h-4.5"></i>
-              <span>Dokumentasi</span>
-              <span class="ml-auto text-[9px] font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill">Soon</span>
+            <a href="dokumentasi.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs group">
+              <i data-lucide="camera" class="w-4.5 h-4.5 text-brand-gold group-hover:scale-110 transition-transform"></i>
+              <span class="font-bold text-white">Dokumentasi & Galeri</span>
             </a>
-            <!-- Modul Belajar (Soon) -->
-            <a href="#" onclick="showToast('Modul Belajar & Perangkat Ajar Kurikulum Merdeka.', 'info'); return false;" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs group">
+            <a href="data-murid.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs">
+              <i data-lucide="users" class="w-4.5 h-4.5"></i>
+              <span>Data Murid</span>
+            </a>
+            <a href="modul-belajar.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs">
               <i data-lucide="book-open" class="w-4.5 h-4.5"></i>
               <span>Modul Belajar</span>
-              <span class="ml-auto text-[9px] font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill">Soon</span>
             </a>
-          </nav>
-        </div>
-
-        <!-- ADMINISTRASI GURU -->
-        <div class="pt-2 border-t border-white/5">
-          <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Administrasi</p>
-          <nav class="space-y-1.5">
-            <!-- Isi Profil & Kelas (Soon) -->
-            <a href="#" onclick="showToast('Fitur Pengaturan Profil Guru & Pengelolaan Kelas.', 'info'); return false;" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs group">
-              <i data-lucide="user-cog" class="w-4.5 h-4.5"></i>
-              <span>Profil & Kelas</span>
-              <span class="ml-auto text-[9px] font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill">Soon</span>
+            <a href="asesmen-harian.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs">
+              <i data-lucide="clipboard-check" class="w-4.5 h-4.5"></i>
+              <span>Asesmen Harian</span>
             </a>
-            <!-- Pendidikan (Soon) -->
-            <a href="#" onclick="showToast('Modul Riwayat Pendidikan & Pengembangan Kompetensi Guru.', 'info'); return false;" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs group">
-              <i data-lucide="graduation-cap" class="w-4.5 h-4.5"></i>
-              <span>Pendidikan</span>
-              <span class="ml-auto text-[9px] font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill">Soon</span>
+            <a href="erapor-cetak.html?from=guru" target="_blank" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-xs">
+              <i data-lucide="file-text" class="w-4.5 h-4.5"></i>
+              <span>e-Rapor Digital</span>
             </a>
           </nav>
         </div>
@@ -198,7 +185,7 @@
     <!-- MAIN DASHBOARD CONTENT -->
     <main class="flex-1 overflow-y-auto p-6 lg:p-8 space-y-8">
 
-      <!-- WELCOME HERO BANNER (Microsoft 365 + Linear Style) -->
+      <!-- WELCOME HERO BANNER -->
       <div class="relative overflow-hidden bg-gradient-to-r from-brand-navyCard via-brand-navyLight to-brand-navyCard text-white rounded-card p-8 shadow-card border border-white/10">
         <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div>
@@ -206,17 +193,20 @@
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> PORTAL UTAMA GURU PAUD
             </span>
             <h1 class="text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight">Selamat Pagi, Ibu Siti Nurhaliza! 👋</h1>
-            <p class="text-xs sm:text-sm text-brand-lightGrey mt-1 max-w-xl">Kelola modul interaktif, pencatatan presensi harian, serta narasi e-Rapor murid Kurikulum Merdeka secara terintegrasi.</p>
+            <p class="text-xs sm:text-sm text-brand-lightGrey mt-1 max-w-xl">Kelola dokumentasi portofolio, presensi harian, serta narasi e-Rapor murid Kurikulum Merdeka secara terintegrasi.</p>
           </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <a href="presensi-guru.html" class="bg-brand-gold hover:bg-yellow-500 text-brand-navy font-bold text-xs px-5 py-3 rounded-btn shadow-gold-glow transition-all flex items-center gap-2">
-              <i data-lucide="user-check" class="w-4 h-4"></i>
-              <span>Presensi & e-Rapor Murid</span>
+          <div class="flex items-center gap-3 shrink-0 flex-wrap sm:flex-nowrap">
+            <a href="dokumentasi.html" class="bg-brand-navyLight hover:bg-white/10 text-brand-gold border border-brand-gold/40 font-bold text-xs px-5 py-3 rounded-btn shadow-md transition-all flex items-center gap-2">
+              <i data-lucide="camera" class="w-4 h-4"></i>
+              <span>Pusat Dokumentasi</span>
+            </a>
+            <a href="erapor-cetak.html?from=guru" target="_blank" class="bg-brand-gold hover:bg-yellow-500 text-brand-navy font-bold text-xs px-5 py-3 rounded-btn shadow-gold-glow transition-all flex items-center gap-2">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+              <span>Cetak e-Rapor Digital</span>
             </a>
           </div>
         </div>
 
-        <!-- Watermark Transparan & Accent Glow -->
         <i data-lucide="layout-dashboard" class="w-64 h-64 text-white/5 absolute -right-10 -bottom-16 pointer-events-none"></i>
         <div class="absolute top-0 right-1/4 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
       </div>
@@ -248,16 +238,16 @@
           <p class="text-[11px] text-brand-lightGrey mt-3">1 Izin • 1 Sakit • 0 Alpa</p>
         </div>
 
-        <!-- Modul Ajar Aktif -->
-        <div class="bg-brand-navyCard p-5 rounded-card border border-white/10 shadow-card flex flex-col justify-between">
+        <!-- Portofolio Foto (Konek ke Dokumentasi) -->
+        <div class="bg-brand-navyCard p-5 rounded-card border border-white/10 shadow-card flex flex-col justify-between border-l-4 border-l-brand-gold">
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-brand-gold uppercase tracking-wider">Modul Ajar</span>
-              <span class="text-[10px] font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded-pill border border-brand-gold/20">Siap Putar</span>
+              <span class="text-[11px] font-bold text-brand-gold uppercase tracking-wider">Dokumentasi Foto</span>
+              <span class="text-[10px] font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded-pill border border-brand-gold/20">Sync e-Rapor</span>
             </div>
-            <p class="text-2xl lg:text-3xl font-heading font-extrabold text-brand-gold mt-3">12 <span class="text-xs font-normal text-brand-lightGrey">Modul</span></p>
+            <p class="text-2xl lg:text-3xl font-heading font-extrabold text-brand-gold mt-3">142 <span class="text-xs font-normal text-brand-lightGrey">Foto</span></p>
           </div>
-          <p class="text-[11px] text-brand-lightGrey mt-3">Topik: Aku Cinta Bumi</p>
+          <a href="dokumentasi.html" class="text-[11px] text-brand-gold hover:underline mt-3 block">Lihat Galeri Foto →</a>
         </div>
 
         <!-- Asesmen Harian -->
@@ -279,11 +269,11 @@
         <h2 class="text-xs font-bold uppercase tracking-widest text-brand-gold px-1">Aksi Cepat Guru</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           
-          <a href="#" onclick="showToast('Modul Ajar akan segera diputar!', 'info'); return false;" class="bg-brand-navyCard hover:bg-brand-navyLight border border-white/10 hover:border-brand-gold/50 p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
+          <a href="dokumentasi.html" class="bg-brand-navyCard hover:bg-brand-navyLight border border-brand-gold/30 hover:border-brand-gold p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
             <div class="w-10 h-10 rounded-btn bg-brand-gold/10 border border-brand-gold/30 text-brand-gold flex items-center justify-center font-bold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">
-              <i data-lucide="play" class="w-5 h-5"></i>
+              <i data-lucide="camera" class="w-5 h-5"></i>
             </div>
-            <span class="font-bold text-xs text-white">▶ Putar Modul Ajar</span>
+            <span class="font-bold text-xs text-white">📸 Unggah Dokumentasi</span>
           </a>
 
           <a href="presensi-guru.html" class="bg-brand-navyCard hover:bg-brand-navyLight border border-white/10 hover:border-brand-gold/50 p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
@@ -293,18 +283,18 @@
             <span class="font-bold text-xs text-white">✅ Input Presensi</span>
           </a>
 
-          <a href="presensi-guru.html" class="bg-brand-navyCard hover:bg-brand-navyLight border border-white/10 hover:border-brand-gold/50 p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
+          <a href="asesmen-harian.html" class="bg-brand-navyCard hover:bg-brand-navyLight border border-white/10 hover:border-brand-gold/50 p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
             <div class="w-10 h-10 rounded-btn bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold group-hover:bg-brand-info group-hover:text-white transition-colors">
               <i data-lucide="clipboard-check" class="w-5 h-5"></i>
             </div>
-            <span class="font-bold text-xs text-white">📝 Asesmen & Rapor</span>
+            <span class="font-bold text-xs text-white">📝 Input Asesmen</span>
           </a>
 
-          <a href="#" onclick="showToast('Fitur Dokumentasi Foto Portofolio Murid.', 'info'); return false;" class="bg-brand-navyCard hover:bg-brand-navyLight border border-white/10 hover:border-brand-gold/50 p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
+          <a href="data-murid.html" class="bg-brand-navyCard hover:bg-brand-navyLight border border-white/10 hover:border-brand-gold/50 p-4 rounded-card shadow-card transition-all flex items-center gap-3 group">
             <div class="w-10 h-10 rounded-btn bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold group-hover:bg-purple-500 group-hover:text-white transition-colors">
-              <i data-lucide="camera" class="w-5 h-5"></i>
+              <i data-lucide="users" class="w-5 h-5"></i>
             </div>
-            <span class="font-bold text-xs text-white">📷 Dokumentasi</span>
+            <span class="font-bold text-xs text-white">👨‍👩‍👧 Data Murid</span>
           </a>
 
         </div>
@@ -313,7 +303,7 @@
       <!-- MAIN CONTENT GRID -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- LEFT COLUMN: SCHEDULE & FEATURED MODULES (7 Cols) -->
+        <!-- LEFT COLUMN: SCHEDULE & RECENT DOKUMENTASI (7 Cols) -->
         <div class="lg:col-span-7 space-y-6">
           
           <!-- SCHEDULE -->
@@ -346,47 +336,52 @@
                     <p class="text-[11px] text-brand-lightGrey">Eksplorasi Halaman & Menyiram Bunga</p>
                   </div>
                 </div>
-                <button onclick="showToast('Modul pembelajaran siap diputar.', 'info')" class="text-xs font-semibold text-brand-gold border border-brand-gold/30 px-3 py-1.5 rounded-btn hover:bg-brand-gold/10 transition-all">Putar Modul</button>
+                <a href="dokumentasi.html" class="text-xs font-semibold text-brand-gold border border-brand-gold/30 px-3 py-1.5 rounded-btn hover:bg-brand-gold/10 transition-all flex items-center gap-1">
+                  <i data-lucide="camera" class="w-3.5 h-3.5"></i> Foto Kegiatan
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- FEATURED MODULES -->
+          <!-- RECENT DOKUMENTASI PREVIEW (INTEGRATION WITH DOKUMENTASI.HTML) -->
           <div class="bg-brand-navyCard rounded-card border border-white/10 p-6 shadow-card space-y-4">
             <div class="flex items-center justify-between border-b border-white/10 pb-4">
-              <h3 class="font-bold text-sm text-white font-heading">Modul Pembelajaran Minggu Ini</h3>
-              <a href="#" onclick="showToast('Katalog Modul Belajar sedang dirancang.', 'info'); return false;" class="text-xs font-bold text-brand-gold hover:underline">Lihat Semua Modul →</a>
+              <div class="flex items-center gap-2">
+                <i data-lucide="camera" class="w-5 h-5 text-brand-gold"></i>
+                <h3 class="font-bold text-sm text-white font-heading">Dokumentasi Portofolio Terbaru</h3>
+              </div>
+              <a href="dokumentasi.html" class="text-xs font-bold text-brand-gold hover:underline">Kelola Dokumentasi →</a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              <!-- Card Modul 1 -->
+              <!-- Card Dokumentasi 1 -->
               <div class="border border-white/10 bg-brand-navyLight rounded-card overflow-hidden hover:border-brand-gold/50 transition-all group">
                 <div class="relative aspect-video bg-slate-900">
-                  <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=500" alt="Thumbnail Modul" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300">
-                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded-pill">Modul #04</span>
+                  <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=500" alt="Foto Aktivitas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded-pill">🟡 STEAM & Seni</span>
                 </div>
-                <div class="p-4 space-y-3">
-                  <h4 class="font-bold text-xs text-white leading-snug">Aku Cinta Bumi - Merawat Tanaman</h4>
-                  <p class="text-[11px] text-brand-lightGrey line-clamp-2">Mengenal jenis bunga, cara menyiram, dan doa syukur.</p>
-                  <button onclick="showToast('Membuka Modul Aku Cinta Bumi...', 'info')" class="w-full bg-brand-gold hover:bg-yellow-500 text-brand-navy text-xs font-bold py-2.5 rounded-btn flex items-center justify-center gap-2 transition-all">
-                    <i data-lucide="play-circle" class="w-4 h-4"></i> Buka Modul
-                  </button>
+                <div class="p-4 space-y-2">
+                  <div class="flex justify-between items-center text-[10px] text-brand-lightGrey">
+                    <span class="font-bold text-white">Ananda Budi</span>
+                    <span>27 Juli 2026</span>
+                  </div>
+                  <p class="text-xs text-slate-300 line-clamp-2">Menyusun balok geometri sesuai susunan warna tanpa bantuan.</p>
                 </div>
               </div>
 
-              <!-- Card Modul 2 -->
+              <!-- Card Dokumentasi 2 -->
               <div class="border border-white/10 bg-brand-navyLight rounded-card overflow-hidden hover:border-brand-gold/50 transition-all group">
                 <div class="relative aspect-video bg-slate-900">
-                  <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=500" alt="Thumbnail Modul" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-300">
-                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded-pill">Modul #03</span>
+                  <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=500" alt="Foto Agenda" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-blue-400 border border-blue-500/40 text-[10px] font-bold px-2 py-0.5 rounded-pill">🏛️ Agenda Sekolah</span>
                 </div>
-                <div class="p-4 space-y-3">
-                  <h4 class="font-bold text-xs text-white leading-snug">Aku Sayang Teman - Indahnya Berbagi</h4>
-                  <p class="text-[11px] text-brand-lightGrey line-clamp-2">Pengembangan empati dan bermain tanpa berebut.</p>
-                  <button onclick="showToast('Membuka Modul Aku Sayang Teman...', 'info')" class="w-full bg-brand-navyCard border border-brand-gold/40 text-brand-gold hover:bg-brand-navyLight text-xs font-bold py-2.5 rounded-btn flex items-center justify-center gap-2 transition-all">
-                    <i data-lucide="play-circle" class="w-4 h-4"></i> Buka Modul
-                  </button>
+                <div class="p-4 space-y-2">
+                  <div class="flex justify-between items-center text-[10px] text-brand-lightGrey">
+                    <span class="font-bold text-white">TK Bintang Bulakamba</span>
+                    <span>20 Juli 2026</span>
+                  </div>
+                  <p class="text-xs text-slate-300 line-clamp-2">Rapat Koordinasi Komite Sekolah & Wali Murid Awal Semester.</p>
                 </div>
               </div>
 
@@ -398,7 +393,7 @@
         <!-- RIGHT COLUMN: AI SAHABAT GURU & RAPOR ASSISTANT (5 Cols) -->
         <div class="lg:col-span-5 space-y-6">
           
-          <!-- AI SAHABAT GURU CONTAINER (ChatGPT Style) -->
+          <!-- AI SAHABAT GURU CONTAINER -->
           <div class="bg-gradient-to-br from-brand-navyCard via-brand-navyLight to-brand-navyCard rounded-card p-6 text-white border border-brand-gold/40 shadow-gold-glow space-y-4 relative overflow-hidden">
             
             <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -435,12 +430,12 @@
 
           </div>
 
-          <!-- QUICK LINK TO PRESENSI & RAPOR -->
+          <!-- QUICK LINK TO DOKUMENTASI & PROFIL -->
           <div class="bg-brand-navyCard rounded-card border border-white/10 p-6 shadow-card space-y-3">
-            <h3 class="font-bold text-sm text-white font-heading">Portal Presensi & e-Rapor Digital</h3>
-            <p class="text-xs text-brand-lightGrey leading-relaxed">Kelola pencatatan kehadiran, asesmen harian, serta cetak laporan e-Rapor secara langsung dari modul presensi.</p>
-            <a href="presensi-guru.html" class="w-full bg-brand-navyLight border border-brand-gold/30 hover:border-brand-gold text-brand-gold font-bold text-xs py-3 rounded-btn flex items-center justify-center gap-2 transition-all">
-              <i data-lucide="user-check" class="w-4 h-4"></i> Kelola Presensi & e-Rapor
+            <h3 class="font-bold text-sm text-white font-heading">Portofolio & Galeri Publik</h3>
+            <p class="text-xs text-brand-lightGrey leading-relaxed">Kelola penyaluran foto kegiatan murid ke Dashboard Orang Tua, e-Rapor, dan Website Utama Sekolah.</p>
+            <a href="dokumentasi.html" class="w-full bg-brand-navyLight border border-brand-gold/30 hover:border-brand-gold text-brand-gold font-bold text-xs py-3 rounded-btn flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="camera" class="w-4 h-4"></i> Kelola Galeri & Distribusi Foto
             </a>
           </div>
 

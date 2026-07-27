@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi Murid - BULAENG Teacher Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#111B38',
+                            navyLight: '#1B2A54',
+                            gold: '#D4AF37',
+                            softGrey: '#F8FAFC',
+                            darkGrey: '#0F172A',
+                            lightGrey: '#64748B',
+                            success: '#10B981',
+                            error: '#EF4444',
+                            warning: '#F59E0B',
+                            info: '#3B82F6'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px rgba(17, 27, 56, 0.04)',
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.03)',
+                        'gold-glow': '0 0 25px rgba(212, 175, 55, 0.25)',
+                        'toast': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                    },
+                    borderRadius: {
+                        'card': '18px',
+                        'btn': '12px',
+                        'input': '10px',
+                        'pill': '999px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Smooth Transitions */
+        .btn-status-transition {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Custom Pattern Background */
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(212, 175, 55, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-brand-softGrey font-body text-brand-darkGrey antialiased selection:bg-brand-gold selection:text-brand-navy">
+
+    <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <div class="flex min-h-screen">
+        <!-- SIDEBAR (Microsoft Teams & Notion Hybrid) -->
+        <aside class="w-72 bg-brand-navy text-white flex flex-col justify-between p-6 shrink-0 hidden lg:flex border-r border-white/5">
+            <div>
+                <!-- Brand Logo (56px Enterprise Standard) -->
+                <div class="flex items-center gap-4 mb-8 pb-6 border-b border-white/10">
+                    <img src="assets/logo.png" alt="Logo BULAENG" class="w-14 h-14 object-contain drop-shadow-lg">
+                    <div>
+                        <h1 class="font-heading font-extrabold text-xl text-white tracking-wider leading-none">BULAENG</h1>
+                        <p class="font-heading font-semibold text-[10px] text-brand-gold tracking-widest uppercase mt-1">Teacher Portal</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu with Breathing Space -->
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-[10px] font-bold text-brand-lightGrey uppercase tracking-widest px-4 mb-3">Menu Utama</p>
+                        <nav class="space-y-1.5">
+                            <a href="dashboard-guru.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-sm">
+                                <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            <a href="presensi-guru.html" class="flex items-center gap-3.5 px-4 py-3 bg-white/10 text-brand-gold border-l-4 border-brand-gold font-semibold rounded-r-btn transition-all text-sm">
+                                <i data-lucide="user-check" class="w-5 h-5 text-brand-gold"></i>
+                                <span>Presensi Murid</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/5">
+                        <p class="text-[10px] font-bold text-brand-lightGrey uppercase tracking-widest px-4 mb-3">Akademik & Ajar</p>
+                        <nav class="space-y-1.5">
+                            <a href="data-murid.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-sm">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                                <span>Data Murid</span>
+                            </a>
+                            <a href="modul-belajar.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-sm">
+                                <i data-lucide="book-open" class="w-5 h-5"></i>
+                                <span>Modul Belajar</span>
+                            </a>
+                            <a href="asesmen-harian.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-sm">
+                                <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                                <span>Asesmen Harian</span>
+                            </a>
+                            <a href="erapor-cetak.html" class="flex items-center gap-3.5 px-4 py-3 text-brand-lightGrey hover:text-white hover:bg-white/5 rounded-btn transition-all font-medium text-sm">
+                                <i data-lucide="file-text" class="w-5 h-5"></i>
+                                <span>e-Rapor Digital</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Cloud Status -->
+            <div class="bg-white/5 border border-white/10 p-4 rounded-card">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="w-2.5 h-2.5 rounded-pill bg-brand-success animate-pulse"></span>
+                    <span class="text-xs font-semibold text-white">Cloud Sync Active</span>
+                </div>
+                <p class="text-[11px] text-brand-lightGrey">TK Bintang Bulakamba</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+            
+            <!-- STICKY HEADER DASHBOARD -->
+            <header class="bg-brand-navy border-b border-white/10 px-8 py-4 text-white sticky top-0 z-20 shadow-md">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    
+                    <!-- School Context -->
+                    <div class="flex items-center gap-4">
+                        <button class="lg:hidden text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                        <div class="w-10 h-10 rounded-btn bg-white/10 flex items-center justify-center text-brand-gold border border-white/10">
+                            <i data-lucide="school" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-heading font-bold text-base text-white">TK Bintang Bulakamba</h2>
+                            <p class="text-xs text-brand-lightGrey flex items-center gap-2 mt-0.5">
+                                <span>Senin, 27 Juli 2026</span>
+                                <span class="text-white/20">•</span>
+                                <span class="text-brand-gold font-medium">Semester Ganjil 2026/2027</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- User Greeting Badge -->
+                    <div class="flex items-center gap-4 self-end md:self-auto">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-xs text-brand-lightGrey">Halo,</p>
+                            <p class="text-sm font-bold text-white">Ibu Siti Nurhaliza, S.Pd.</p>
+                            <span class="inline-block text-[10px] bg-brand-gold/20 text-brand-gold px-2.5 py-0.5 rounded-pill font-semibold border border-brand-gold/30 mt-0.5">Kelompok B2</span>
+                        </div>
+                        <a href="dashboard-guru.html" class="bg-white/10 hover:bg-white/20 text-white font-medium px-4 py-2 rounded-btn text-xs flex items-center gap-2 transition-all border border-white/10">
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            <span>Beranda</span>
+                        </a>
+                    </div>
+
+                </div>
+            </header>
+
+            <!-- PAGE CONTENT CONTAINER -->
+            <div class="p-8 space-y-8 max-w-7xl w-full mx-auto">
+                
+                <!-- 1. HERO BANNER PREMIUM (Microsoft 365 + Linear Style) -->
+                <div class="relative overflow-hidden bg-gradient-to-r from-brand-navy via-brand-navyLight to-brand-navy text-white rounded-card p-8 shadow-soft border border-white/10 bg-grid-pattern">
+                    <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-3 py-1 rounded-pill bg-brand-gold/20 text-brand-gold text-xs font-bold border border-brand-gold/30 flex items-center gap-1.5">
+                                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> PRESENSI MURID
+                                </span>
+                                <span class="text-xs text-brand-lightGrey">Monitoring Kehadiran Digital</span>
+                            </div>
+                            <h1 class="font-heading font-extrabold text-2xl lg:text-3xl tracking-tight">Kelompok B2 • TK Bintang Bulakamba</h1>
+                            <p class="text-xs text-brand-lightGrey mt-2">Semester Ganjil 2026/2027 • Pencatatan kehadiran real-time terintegrasi e-Rapor & Notifikasi Orang Tua.</p>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <button onclick="simpanPresensi()" class="bg-brand-gold hover:bg-yellow-500 text-brand-navy font-bold px-6 py-3 rounded-btn text-sm flex items-center gap-2.5 transition-all shadow-gold-glow">
+                                <i data-lucide="save" class="w-4.5 h-4.5"></i>
+                                <span>Simpan Presensi</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Watermark Transparan & Accent Glow -->
+                    <i data-lucide="user-check" class="w-64 h-64 text-white/5 absolute -right-10 -bottom-16 pointer-events-none"></i>
+                    <div class="absolute top-0 right-1/4 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+                </div>
+
+                <!-- 9. CLASS PRESENCE PROGRESS BAR -->
+                <div class="bg-white p-5 rounded-card shadow-card border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-brand-navy uppercase tracking-wider">Progress Kelengkapan Presensi</span>
+                            <span id="progress-text" class="text-xs font-extrabold text-brand-gold">90% Selesai (18/20 Murid)</span>
+                        </div>
+                        <div class="w-full h-3 bg-slate-100 rounded-pill overflow-hidden p-0.5">
+                            <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-gold to-yellow-500 rounded-pill transition-all duration-500" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 & 3. DASHBOARD INSIGHT GRID (Power BI Cards + AI Sahabat Guru) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- 2. POWER BI STATISTIC CARDS (2 Cols) -->
+                    <div class="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <!-- Hadir Card -->
+                        <div class="bg-white p-5 rounded-card shadow-card border border-slate-100 border-l-4 border-l-brand-success flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[11px] font-bold text-brand-success bg-emerald-50 px-2 py-0.5 rounded-pill flex items-center gap-1">
+                                        🟢 HADIR
+                                    </span>
+                                    <span class="text-[10px] font-bold text-emerald-600">+5% vs kemaren</span>
+                                </div>
+                                <h3 id="count-hadir" class="font-heading font-extrabold text-3xl text-brand-navy mt-3">18</h3>
+                            </div>
+                            <p class="text-[11px] text-brand-lightGrey mt-2">dari total 20 murid</p>
+                        </div>
+
+                        <!-- Izin Card -->
+                        <div class="bg-white p-5 rounded-card shadow-card border border-slate-100 border-l-4 border-l-brand-info flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[11px] font-bold text-brand-info bg-blue-50 px-2 py-0.5 rounded-pill flex items-center gap-1">
+                                        🔵 IZIN
+                                    </span>
+                                    <span class="text-[10px] font-medium text-brand-lightGrey">5%</span>
+                                </div>
+                                <h3 id="count-izin" class="font-heading font-extrabold text-3xl text-brand-navy mt-3">1</h3>
+                            </div>
+                            <p class="text-[11px] text-brand-lightGrey mt-2">surat resmi terlampir</p>
+                        </div>
+
+                        <!-- Sakit Card -->
+                        <div class="bg-white p-5 rounded-card shadow-card border border-slate-100 border-l-4 border-l-brand-warning flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[11px] font-bold text-brand-warning bg-amber-50 px-2 py-0.5 rounded-pill flex items-center gap-1">
+                                        🟡 SAKIT
+                                    </span>
+                                    <span class="text-[10px] font-medium text-brand-lightGrey">5%</span>
+                                </div>
+                                <h3 id="count-sakit" class="font-heading font-extrabold text-3xl text-brand-navy mt-3">1</h3>
+                            </div>
+                            <p class="text-[11px] text-brand-lightGrey mt-2">demam ringan</p>
+                        </div>
+
+                        <!-- Alpa Card -->
+                        <div class="bg-white p-5 rounded-card shadow-card border border-slate-100 border-l-4 border-l-brand-error flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[11px] font-bold text-brand-error bg-red-50 px-2 py-0.5 rounded-pill flex items-center gap-1">
+                                        🔴 ALPA
+                                    </span>
+                                    <span class="text-[10px] font-medium text-brand-lightGrey">0%</span>
+                                </div>
+                                <h3 id="count-alpa" class="font-heading font-extrabold text-3xl text-brand-navy mt-3">0</h3>
+                            </div>
+                            <p class="text-[11px] text-brand-lightGrey mt-2">tanpa keterangan</p>
+                        </div>
+                    </div>
+
+                    <!-- 3. AI SAHABAT GURU (ChatGPT / Notion AI Style) -->
+                    <div class="bg-gradient-to-br from-brand-navy via-brand-navyLight to-brand-navy p-6 rounded-card shadow-gold-glow border border-brand-gold/30 text-white flex flex-col justify-between relative overflow-hidden">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-btn bg-brand-gold text-brand-navy flex items-center justify-center font-bold shadow-md">
+                                    <i data-lucide="bot" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-heading font-bold text-sm text-brand-gold tracking-wide">AI SAHABAT GURU</h3>
+                                    <p class="text-[10px] text-brand-lightGrey">Analisis Otomatis Kehadiran</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-200 leading-relaxed mt-2">
+                                Hari ini tingkat kehadiran kelas <strong class="text-white font-bold">90%</strong>. Saya mendeteksi <span class="text-amber-300 font-semibold">Citra Putri</span> sudah sakit <strong class="text-white font-bold">3 hari berturut-turut</strong>. Sebaiknya lakukan komunikasi dengan orang tua.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-[10px] text-brand-lightGrey">Direkomendasikan</span>
+                            <a href="https://wa.me/628198765432" target="_blank" class="bg-brand-gold hover:bg-yellow-500 text-brand-navy font-bold px-3.5 py-1.5 rounded-btn text-xs flex items-center gap-1.5 transition-all">
+                                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                <span>Hubungi WA</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 7 & 8. SEARCH & FILTER TOOLBAR -->
+                <div class="bg-white p-4 rounded-card shadow-card border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-80">
+                        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                        <input type="text" id="search-input" onkeyup="filterMurid()" placeholder="Cari nama murid atau NISN..." class="w-full pl-10 pr-4 py-2 text-xs rounded-input border border-slate-200 bg-brand-softGrey focus:bg-white focus:outline-none focus:border-brand-gold transition-all">
+                    </div>
+
+                    <!-- Filter Buttons Segmented -->
+                    <div class="flex items-center gap-1 bg-brand-softGrey p-1 rounded-btn border border-slate-200/60 w-full md:w-auto overflow-x-auto">
+                        <button onclick="filterStatus('semua')" class="filter-tab active-tab px-3.5 py-1.5 rounded-input text-xs font-bold bg-white text-brand-navy shadow-sm transition-all">Semua</button>
+                        <button onclick="filterStatus('hadir')" class="filter-tab px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy transition-all">Hadir</button>
+                        <button onclick="filterStatus('izin')" class="filter-tab px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy transition-all">Izin</button>
+                        <button onclick="filterStatus('sakit')" class="filter-tab px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy transition-all">Sakit</button>
+                        <button onclick="filterStatus('alpa')" class="filter-tab px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy transition-all">Alpa</button>
+                    </div>
+                </div>
+
+                <!-- 4, 5, & 6. DAFTAR MURID NOTION/LINEAR STYLE -->
+                <div class="space-y-3" id="student-container">
+                    
+                    <!-- Murid Item 1 -->
+                    <div class="student-card bg-white p-4 lg:p-5 rounded-card shadow-card border border-slate-100 hover:border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4" data-status="hadir" data-name="ananda budi" data-nisn="0012849102">
+                        <!-- Identity & Smart Avatar (Yellow Theme) -->
+                        <div class="flex items-center gap-4 min-w-[240px]">
+                            <div class="w-11 h-11 rounded-btn bg-amber-100 text-amber-800 font-bold font-heading flex items-center justify-center text-sm border border-amber-200 shadow-sm">
+                                🟡 AB
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy font-heading text-sm">Ananda Budi</h4>
+                                <p class="text-[11px] text-brand-lightGrey">NISN: 0012849102 • Laki-laki</p>
+                            </div>
+                        </div>
+
+                        <!-- Status Option Radio Buttons (5. Radio Style Active) -->
+                        <div class="flex items-center gap-2 bg-brand-softGrey p-1.5 rounded-btn border border-slate-200/60 self-start md:self-auto">
+                            <button onclick="setPresence(this, 'hadir')" class="btn-presence active-hadir px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-success text-white shadow-sm btn-status-transition flex items-center gap-1">
+                                🟢 Hadir
+                            </button>
+                            <button onclick="setPresence(this, 'izin')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Izin
+                            </button>
+                            <button onclick="setPresence(this, 'sakit')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Sakit
+                            </button>
+                            <button onclick="setPresence(this, 'alpa')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Alpa
+                            </button>
+                        </div>
+
+                        <!-- Time & Note -->
+                        <div class="flex items-center gap-3 w-full md:w-72">
+                            <span class="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-1 rounded-md shrink-0">07.15 WIB</span>
+                            <input type="text" placeholder="Catatan / keterangan..." class="w-full text-xs px-3 py-1.5 rounded-input border border-slate-200 bg-brand-softGrey focus:bg-white focus:outline-none focus:border-brand-gold transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Murid Item 2 -->
+                    <div class="student-card bg-white p-4 lg:p-5 rounded-card shadow-card border border-slate-100 hover:border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4" data-status="sakit" data-name="citra putri" data-nisn="0012849103">
+                        <!-- Identity & Smart Avatar (Blue Theme) -->
+                        <div class="flex items-center gap-4 min-w-[240px]">
+                            <div class="w-11 h-11 rounded-btn bg-blue-100 text-blue-800 font-bold font-heading flex items-center justify-center text-sm border border-blue-200 shadow-sm">
+                                🔵 CP
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy font-heading text-sm">Citra Putri</h4>
+                                <p class="text-[11px] text-brand-lightGrey">NISN: 0012849103 • Perempuan</p>
+                            </div>
+                        </div>
+
+                        <!-- Status Option Radio Buttons -->
+                        <div class="flex items-center gap-2 bg-brand-softGrey p-1.5 rounded-btn border border-slate-200/60 self-start md:self-auto">
+                            <button onclick="setPresence(this, 'hadir')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Hadir
+                            </button>
+                            <button onclick="setPresence(this, 'izin')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Izin
+                            </button>
+                            <button onclick="setPresence(this, 'sakit')" class="btn-presence active-sakit px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-warning text-white shadow-sm btn-status-transition flex items-center gap-1">
+                                🟡 Sakit
+                            </button>
+                            <button onclick="setPresence(this, 'alpa')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Alpa
+                            </button>
+                        </div>
+
+                        <!-- Time & Note -->
+                        <div class="flex items-center gap-3 w-full md:w-72">
+                            <span class="text-[10px] font-semibold bg-amber-50 text-amber-700 px-2 py-1 rounded-md shrink-0">Izin Sakit</span>
+                            <input type="text" value="Demam ringan, surat via WA" class="w-full text-xs px-3 py-1.5 rounded-input border border-slate-200 bg-brand-softGrey focus:bg-white focus:outline-none focus:border-brand-gold transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Murid Item 3 -->
+                    <div class="student-card bg-white p-4 lg:p-5 rounded-card shadow-card border border-slate-100 hover:border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4" data-status="hadir" data-name="dewa rizal" data-nisn="0012849104">
+                        <!-- Identity & Smart Avatar (Green Theme) -->
+                        <div class="flex items-center gap-4 min-w-[240px]">
+                            <div class="w-11 h-11 rounded-btn bg-emerald-100 text-emerald-800 font-bold font-heading flex items-center justify-center text-sm border border-emerald-200 shadow-sm">
+                                🟢 DR
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy font-heading text-sm">Dewa Rizal</h4>
+                                <p class="text-[11px] text-brand-lightGrey">NISN: 0012849104 • Laki-laki</p>
+                            </div>
+                        </div>
+
+                        <!-- Status Option Radio Buttons -->
+                        <div class="flex items-center gap-2 bg-brand-softGrey p-1.5 rounded-btn border border-slate-200/60 self-start md:self-auto">
+                            <button onclick="setPresence(this, 'hadir')" class="btn-presence active-hadir px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-success text-white shadow-sm btn-status-transition flex items-center gap-1">
+                                🟢 Hadir
+                            </button>
+                            <button onclick="setPresence(this, 'izin')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Izin
+                            </button>
+                            <button onclick="setPresence(this, 'sakit')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Sakit
+                            </button>
+                            <button onclick="setPresence(this, 'alpa')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Alpa
+                            </button>
+                        </div>
+
+                        <!-- Time & Note -->
+                        <div class="flex items-center gap-3 w-full md:w-72">
+                            <span class="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-1 rounded-md shrink-0">07.20 WIB</span>
+                            <input type="text" placeholder="Catatan / keterangan..." class="w-full text-xs px-3 py-1.5 rounded-input border border-slate-200 bg-brand-softGrey focus:bg-white focus:outline-none focus:border-brand-gold transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Murid Item 4 -->
+                    <div class="student-card bg-white p-4 lg:p-5 rounded-card shadow-card border border-slate-100 hover:border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4" data-status="hadir" data-name="elina lestari" data-nisn="0012849105">
+                        <!-- Identity & Smart Avatar (Purple Theme) -->
+                        <div class="flex items-center gap-4 min-w-[240px]">
+                            <div class="w-11 h-11 rounded-btn bg-purple-100 text-purple-800 font-bold font-heading flex items-center justify-center text-sm border border-purple-200 shadow-sm">
+                                🟣 EL
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy font-heading text-sm">Elina Lestari</h4>
+                                <p class="text-[11px] text-brand-lightGrey">NISN: 0012849105 • Perempuan</p>
+                            </div>
+                        </div>
+
+                        <!-- Status Option Radio Buttons -->
+                        <div class="flex items-center gap-2 bg-brand-softGrey p-1.5 rounded-btn border border-slate-200/60 self-start md:self-auto">
+                            <button onclick="setPresence(this, 'hadir')" class="btn-presence active-hadir px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-success text-white shadow-sm btn-status-transition flex items-center gap-1">
+                                🟢 Hadir
+                            </button>
+                            <button onclick="setPresence(this, 'izin')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Izin
+                            </button>
+                            <button onclick="setPresence(this, 'sakit')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Sakit
+                            </button>
+                            <button onclick="setPresence(this, 'alpa')" class="btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition">
+                                ○ Alpa
+                            </button>
+                        </div>
+
+                        <!-- Time & Note -->
+                        <div class="flex items-center gap-3 w-full md:w-72">
+                            <span class="text-[10px] font-semibold bg-slate-100 text-slate-600 px-2 py-1 rounded-md shrink-0">07.05 WIB</span>
+                            <input type="text" placeholder="Catatan / keterangan..." class="w-full text-xs px-3 py-1.5 rounded-input border border-slate-200 bg-brand-softGrey focus:bg-white focus:outline-none focus:border-brand-gold transition-all">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC SYSTEM -->
+    <script>
+        lucide.createIcons();
+
+        // 10. TOAST NOTIFICATION SYSTEM (Tanpa alert())
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let bgClass = "bg-brand-navy text-white border-brand-gold";
+            let icon = "check-circle-2";
+
+            if (type === 'success') {
+                bgClass = "bg-brand-navy text-white border-brand-success";
+                icon = "check-circle-2";
+            } else if (type === 'info') {
+                bgClass = "bg-brand-navy text-white border-brand-info";
+                icon = "info";
+            }
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-card border shadow-toast transform transition-all duration-300 opacity-0 translate-y-[-10px] ${bgClass}`;
+            toast.innerHTML = `
+                <i data-lucide="${icon}" class="w-5 h-5 text-brand-gold"></i>
+                <span class="text-xs font-semibold">${message}</span>
+            `;
+
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-[-10px]');
+            }, 10);
+
+            // Animate Out & Remove
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-[-10px]');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // 5. SET PRESENCE RADIO TOGGLE LOGIC
+        function setPresence(btn, status) {
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('.btn-presence');
+            const studentCard = btn.closest('.student-card');
+
+            // Reset All Buttons in Card
+            buttons.forEach(b => {
+                b.className = "btn-presence px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy btn-status-transition";
+                const text = b.innerText.replace('🟢 ', '').replace('🔵 ', '').replace('🟡 ', '').replace('🔴 ', '').replace('○ ', '');
+                b.innerText = `○ ${text}`;
+            });
+
+            // Set Selected Active State
+            if (status === 'hadir') {
+                btn.className = "btn-presence active-hadir px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-success text-white shadow-sm btn-status-transition flex items-center gap-1";
+                btn.innerText = "🟢 Hadir";
+                studentCard.setAttribute('data-status', 'hadir');
+            } else if (status === 'izin') {
+                btn.className = "btn-presence active-izin px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-info text-white shadow-sm btn-status-transition flex items-center gap-1";
+                btn.innerText = "🔵 Izin";
+                studentCard.setAttribute('data-status', 'izin');
+            } else if (status === 'sakit') {
+                btn.className = "btn-presence active-sakit px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-warning text-white shadow-sm btn-status-transition flex items-center gap-1";
+                btn.innerText = "🟡 Sakit";
+                studentCard.setAttribute('data-status', 'sakit');
+            } else if (status === 'alpa') {
+                btn.className = "btn-presence active-alpa px-3.5 py-1.5 rounded-input text-xs font-bold bg-brand-error text-white shadow-sm btn-status-transition flex items-center gap-1";
+                btn.innerText = "🔴 Alpa";
+                studentCard.setAttribute('data-status', 'alpa');
+            }
+
+            showToast(`Status ${studentCard.querySelector('h4').innerText} diubah ke ${status.toUpperCase()}`);
+        }
+
+        // 7. SEARCH FILTER FUNCTION
+        function filterMurid() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.student-card');
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const nisn = card.getAttribute('data-nisn');
+                if (name.includes(query) || nisn.includes(query)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // 8. FILTER STATUS TABS FUNCTION
+        function filterStatus(status) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.className = "filter-tab px-3.5 py-1.5 rounded-input text-xs font-medium text-brand-lightGrey hover:text-brand-navy transition-all";
+            });
+
+            event.target.className = "filter-tab active-tab px-3.5 py-1.5 rounded-input text-xs font-bold bg-white text-brand-navy shadow-sm transition-all";
+
+            const cards = document.querySelectorAll('.student-card');
+            cards.forEach(card => {
+                if (status === 'semua' || card.getAttribute('data-status') === status) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // SAVE BUTTON ACTION
+        function simpanPresensi() {
+            showToast("Presensi berhasil disimpan ke Cloud Database!", "success");
+        }
+    </script>
+</body>
+</html>

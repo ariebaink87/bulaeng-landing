@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beranda Guru - BULAENG Teacher Portal</title>
+  <title>BULAENG Education OS v2.0 - Enterprise Teacher Control Center</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,17 +22,17 @@
         extend: {
           colors: {
             brand: {
-              navy: '#111B38',       /* Deep Luxurious Navy */
-              navyLight: '#1B2A54',  /* Lighter Navy Container */
-              navyCard: '#162244',   /* Premium Card Background */
+              navy: '#0E162D',       /* Deep OS Base */
+              navyLight: '#162244',  /* Lighter Navy Container */
+              navyCard: '#1B2A54',   /* Premium Card Background */
               gold: '#D4AF37',      /* Classic Metallic Gold */
-              goldHover: '#B8962E', /* Rich Gold Hover */
-              softGrey: '#F8FAFC',   /* Soft Neutral Background */
+              goldHover: '#B8962E', 
+              softGrey: '#F8FAFC',   
               darkGrey: '#0F172A',
               lightGrey: '#64748B',
-              success: '#10B981',
-              error: '#EF4444',
-              warning: '#F59E0B',
+              success: '#10B981',   /* Emerald Progress */
+              error: '#EF4444',     /* Red */
+              warning: '#F59E0B',   /* Amber */
               info: '#3B82F6'
             }
           },
@@ -42,16 +42,16 @@
             quote: ['Playfair Display', 'serif'],
           },
           borderRadius: {
-            'card': '18px',
-            'btn': '12px',
-            'input': '10px',
+            'card': '14px',
+            'btn': '10px',
+            'input': '8px',
             'pill': '999px'
           },
           boxShadow: {
-            'soft': '0 10px 30px rgba(17, 27, 56, 0.04)',
-            'card': '0 4px 20px rgba(0, 0, 0, 0.15)',
-            'gold-glow': '0 0 25px rgba(212, 175, 55, 0.25)',
-            'toast': '0 20px 25px -5px rgba(0, 0, 0, 0.2)'
+            'soft': '0 8px 24px rgba(14, 22, 45, 0.06)',
+            'card': '0 4px 16px rgba(0, 0, 0, 0.2)',
+            'gold-glow': '0 0 20px rgba(212, 175, 55, 0.2)',
+            'toast': '0 20px 25px -5px rgba(0, 0, 0, 0.3)'
           }
         }
       }
@@ -61,66 +61,153 @@
   <style>
     /* Grid Pattern Bulaeng Wireframe */
     .bg-grid-pattern {
-      background-image: radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-image: radial-gradient(rgba(212, 175, 55, 0.10) 1px, transparent 1px);
+      background-size: 20px 20px;
     }
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    /* Ultra-Slim Enterprise Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #1B2A54; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb { background: #162244; border-radius: 99px; }
     ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+    /* Skeleton Loading Animation */
+    @keyframes skeleton-shimmer {
+      0% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0.4; }
+    }
+    .animate-skeleton {
+      animation: skeleton-shimmer 1.5s infinite ease-in-out;
+    }
   </style>
 </head>
-<body class="h-full font-body bg-brand-navy text-slate-100 antialiased flex flex-col bg-grid-pattern selection:bg-brand-gold selection:text-brand-navy">
+<body class="h-full font-body bg-brand-navy text-slate-100 antialiased flex flex-col bg-grid-pattern selection:bg-brand-gold selection:text-brand-navy pb-16 md:pb-0">
 
   <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
-  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+  <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
 
-  <!-- HEADER NAVIGATION LUXURY NAVY & GOLD -->
-  <header class="bg-brand-navyCard border-b border-white/10 h-20 sticky top-0 z-40 flex items-center justify-between px-6 shadow-xl">
+  <!-- OFFLINE STATUS BANNER (PWA ENGINE) -->
+  <div id="offline-banner" class="hidden bg-brand-warning text-brand-navy px-4 py-1 text-center font-bold text-xs z-50 flex items-center justify-center gap-2">
+    <i data-lucide="wifi-off" class="w-3.5 h-3.5"></i>
+    <span>Anda sedang dalam Mode Offline. Perubahan data tersimpan secara lokal & akan disinkronkan otomatis saat kembali terhubung.</span>
+  </div>
+
+  <!-- 🌐 LAYER 1: GLOBAL HEADER COMPACT 64PX -->
+  <header class="bg-brand-navyCard border-b border-white/10 h-16 sticky top-0 z-40 flex items-center justify-between px-4 lg:px-6 shadow-xl shrink-0">
     
-    <div class="flex items-center gap-6">
-      <!-- Logo BULAENG -->
-      <a href="dashboard-guru.html" class="flex items-center gap-4">
-        <img src="assets/logo.png" alt="Logo BULAENG" class="w-12 h-12 object-contain drop-shadow-lg">
-        <div class="flex flex-col">
-          <span class="font-heading font-extrabold text-lg leading-none text-white tracking-wider">BULAENG</span>
-          <span class="text-[9px] font-bold text-brand-gold tracking-widest uppercase mt-1">Teacher Portal</span>
+    <!-- LEFT: LOGO, WORKSPACE SWITCHER & TENANT CONTEXT -->
+    <div class="flex items-center gap-3 lg:gap-5">
+      <!-- Logo BULAENG OS -->
+      <a href="dashboard-guru.html" class="flex items-center gap-2.5 shrink-0">
+        <img src="assets/logo.png" alt="Logo BULAENG" class="w-8 h-8 object-contain drop-shadow-md">
+        <div class="flex flex-col hidden sm:flex">
+          <span class="font-heading font-extrabold text-sm leading-none text-white tracking-wider">BULAENG</span>
+          <span class="text-[8px] font-bold text-brand-gold tracking-widest uppercase mt-0.5">Education OS v2.0</span>
         </div>
       </a>
 
-      <div class="h-6 w-[1px] bg-white/10 hidden sm:block"></div>
-      
-      <!-- Indicator Nama Sekolah & Context -->
-      <div class="hidden sm:flex items-center gap-2.5 bg-brand-navyLight px-3.5 py-1.5 rounded-btn border border-white/10 text-xs font-semibold text-slate-300">
-        <i data-lucide="school" class="w-4 h-4 text-brand-gold"></i>
-        <span>TK Bintang Bulakamba</span>
+      <div class="h-5 w-[1px] bg-white/10 hidden md:block"></div>
+
+      <!-- WORKSPACE SWITCHER DROPDOWN -->
+      <div class="relative">
+        <button onclick="toggleWorkspaceDropdown()" class="flex items-center gap-2 bg-brand-navyLight border border-brand-gold/40 hover:border-brand-gold px-3 py-1.5 rounded-btn text-xs font-bold text-white transition-all shadow-sm group">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-gold group-hover:rotate-12 transition-transform"></i>
+          <span class="text-[10px] text-brand-lightGrey font-normal uppercase hidden lg:inline">Workspace:</span>
+          <span id="current-workspace-label" class="text-brand-gold font-bold text-xs">PAUD & TK</span>
+          <i data-lucide="chevron-down" class="w-3 h-3 text-brand-gold ml-0.5"></i>
+        </button>
+
+        <!-- DROPDOWN OPTIONS MENU -->
+        <div id="workspace-menu" class="hidden absolute left-0 mt-2 w-64 rounded-card bg-brand-navyCard border border-brand-gold/40 shadow-card z-50 overflow-hidden divide-y divide-white/10 text-xs">
+          <div class="p-2.5 bg-brand-navyLight">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-brand-gold">Switch Context Workspace</p>
+          </div>
+          <div class="py-1">
+            <button onclick="switchWorkspace('paud')" class="w-full text-left px-3.5 py-2 hover:bg-white/5 flex items-center justify-between text-brand-gold font-bold">
+              <span>🧒 PAUD & TK</span>
+              <span class="text-[8px] bg-brand-gold/20 px-2 py-0.5 rounded-pill border border-brand-gold/30">Active</span>
+            </button>
+            <button onclick="switchWorkspace('sd')" class="w-full text-left px-3.5 py-2 hover:bg-white/5 flex items-center justify-between text-slate-300">
+              <span>🎒 Primary School (SD/MI)</span>
+            </button>
+            <button onclick="switchWorkspace('smp')" class="w-full text-left px-3.5 py-2 hover:bg-white/5 flex items-center justify-between text-slate-300">
+              <span>📘 Junior High (SMP/MTs)</span>
+            </button>
+            <button onclick="switchWorkspace('sma')" class="w-full text-left px-3.5 py-2 hover:bg-white/5 flex items-center justify-between text-slate-300">
+              <span>🎓 Senior High & SMK</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TENANT CONTEXT BADGE -->
+      <div class="hidden xl:flex items-center gap-2 bg-brand-navyLight px-2.5 py-1 rounded-btn border border-white/10 text-[11px]">
+        <i data-lucide="school" class="w-3.5 h-3.5 text-brand-gold"></i>
+        <span id="tenant-school-name" class="font-semibold text-white">TK Negeri 1 Taliwang</span>
         <span class="text-white/20">•</span>
-        <span class="text-brand-gold">Semester Ganjil 2026/2027</span>
+        <span class="text-brand-gold font-bold">2026/2027</span>
       </div>
     </div>
 
-    <div class="flex items-center gap-4">
-      <!-- Notification Icon -->
-      <button onclick="showToast('Tidak ada notifikasi baru saat ini', 'info')" class="relative p-2.5 rounded-btn bg-brand-navyLight text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-all border border-white/10">
-        <i data-lucide="bell" class="w-4.5 h-4.5"></i>
-        <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-pill bg-brand-warning ring-2 ring-brand-navyCard"></span>
-      </button>
-
-      <!-- Profil Guru Ringkas -->
-      <div class="hidden md:flex items-center gap-3 pl-2 border-l border-white/10">
-        <div class="w-9 h-9 rounded-btn bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center text-brand-gold font-bold">
-          SN
+    <!-- MIDDLE: GLOBAL COMMAND SEARCH BAR -->
+    <div class="hidden md:flex items-center flex-1 max-w-xs mx-4">
+      <button onclick="openSearchPalette()" class="w-full bg-brand-navy border border-white/10 hover:border-brand-gold/50 rounded-btn px-3 py-1.5 text-xs text-brand-lightGrey flex items-center justify-between transition-all group">
+        <div class="flex items-center gap-2">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-brand-lightGrey group-hover:text-brand-gold"></i>
+          <span class="text-[11px]">Pencarian Cepat...</span>
         </div>
-        <div class="flex flex-col text-left">
-          <span class="text-xs font-bold text-white leading-tight">Ibu Siti Nurhaliza, S.Pd.</span>
-          <span class="text-[10px] font-semibold text-brand-gold">Wali Kelas / Kelompok B2</span>
+        <span class="text-[9px] bg-white/10 px-1.5 py-0.5 rounded text-slate-300">⌘K</span>
+      </button>
+    </div>
+
+    <!-- RIGHT: NOTIFICATION, STATUS & USER -->
+    <div class="flex items-center gap-2.5">
+      
+      <!-- NOTIFICATION CENTER BUTTON -->
+      <div class="relative">
+        <button onclick="toggleNotificationMenu()" class="relative p-2 rounded-btn bg-brand-navyLight text-brand-gold hover:bg-brand-gold hover:text-brand-navy transition-all border border-white/10">
+          <i data-lucide="bell" class="w-4 h-4"></i>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-pill bg-brand-warning ring-2 ring-brand-navyCard animate-pulse"></span>
+        </button>
+
+        <div id="notification-menu" class="hidden absolute right-0 mt-2 w-72 rounded-card bg-brand-navyCard border border-brand-gold/40 shadow-card z-50 overflow-hidden text-xs">
+          <div class="p-2.5 bg-brand-navyLight flex justify-between items-center border-b border-white/10">
+            <span class="font-bold text-white font-heading">Notification Center</span>
+            <span class="text-[9px] bg-brand-warning/20 text-brand-warning px-2 py-0.5 rounded-pill font-bold">Prioritas</span>
+          </div>
+          <div class="divide-y divide-white/5 max-h-56 overflow-y-auto text-[11px]">
+            <div class="p-2.5 hover:bg-white/5 space-y-0.5 cursor-pointer">
+              <p class="font-bold text-amber-400">⚠️ Presensi Belum Diisi Hari Ini</p>
+              <p class="text-slate-300 text-[10px]">3 murid memerlukan konfirmasi kehadiran.</p>
+            </div>
+            <div class="p-2.5 hover:bg-white/5 space-y-0.5 cursor-pointer">
+              <p class="font-bold text-brand-gold">💬 Pesan Baru Orang Tua</p>
+              <p class="text-slate-300 text-[10px]">Ibu Aisyah menanyakan modul STEAM.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- TOMBOL KEMBALI KE BERANDA (PERUBAHAN TEKS "BERANDA") -->
-      <a href="index.html" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-medium text-xs px-4 py-2.5 rounded-btn border border-white/10 shadow-soft transition-all">
-        <i data-lucide="home" class="w-4 h-4 text-brand-gold"></i>
+      <!-- ONLINE / OFFLINE STATUS BADGE -->
+      <div id="network-status-badge" class="hidden lg:flex items-center gap-1 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-pill text-[9px] font-bold text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-pill bg-brand-success animate-pulse"></span>
+        <span>Online Engine</span>
+      </div>
+
+      <!-- PROFIL RINGKAS GURU -->
+      <div class="flex items-center gap-2 pl-2 border-l border-white/10">
+        <div class="w-8 h-8 rounded-btn bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center text-brand-gold font-bold text-xs">
+          BA
+        </div>
+        <div class="hidden xl:flex flex-col text-left">
+          <span class="text-xs font-bold text-white leading-none">Bustanil Arifin</span>
+          <span class="text-[9px] font-semibold text-brand-gold mt-0.5">Guru Utama</span>
+        </div>
+      </div>
+
+      <!-- BERANDA BUTTON -->
+      <a href="index.html" class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs px-3 py-1.5 rounded-btn border border-white/10 shadow-soft transition-all">
+        <i data-lucide="home" class="w-3.5 h-3.5 text-brand-gold"></i>
         <span class="hidden sm:inline">Beranda</span>
       </a>
     </div>
@@ -128,300 +215,194 @@
 
   <div class="flex flex-1 overflow-hidden">
 
-    <!-- SIDEBAR NAVIGATION MENU (CLEAN, MINIMALIST & ACCENT GOLD) -->
-    <aside class="w-72 bg-brand-navyCard border-r border-white/10 text-slate-300 flex flex-col justify-between p-6 flex-shrink-0 hidden md:flex">
+    <!-- 📌 UNIVERSAL & WORKSPACE SIDEBAR DESKTOP -->
+    <aside class="w-64 bg-brand-navyCard border-r border-white/10 text-slate-300 flex flex-col justify-between p-4 flex-shrink-0 hidden md:flex overflow-y-auto pb-8">
       
-      <div class="space-y-6">
+      <div class="space-y-5">
+        
+        <!-- UNIVERSAL CORE GROUP -->
         <div>
-          <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Menu Utama</p>
-          <nav class="space-y-1.5">
-            <a href="dashboard-guru.html" class="flex items-center gap-3.5 px-4 py-3 bg-white/10 text-brand-gold border-l-4 border-brand-gold font-bold rounded-r-btn transition-all text-xs">
-              <i data-lucide="layout-dashboard" class="w-4.5 h-4.5 text-brand-gold"></i>
-              <span>Beranda Guru</span>
+          <p class="px-2 text-[9px] font-bold uppercase tracking-widest text-brand-lightGrey mb-2">Universal System</p>
+          <nav class="space-y-1">
+            <a href="dashboard-guru.html" class="flex items-center gap-3 px-3 py-2 bg-white/10 text-brand-gold border-l-4 border-brand-gold font-bold rounded-r-btn transition-all text-xs">
+              <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-gold"></i>
+              <span>Dashboard OS</span>
             </a>
-            <!-- Presensi Murid (Icon Gold) -->
-            <a href="presensi-guru.html" class="flex items-center gap-3.5 px-4 py-3 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs">
-              <i data-lucide="user-check" class="w-4.5 h-4.5 text-brand-gold"></i>
-              <span>Presensi Murid</span>
+            <a href="#" onclick="openAIFeatureModal(); return false;" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs group">
+              <i data-lucide="bot" class="w-4 h-4 text-brand-gold group-hover:scale-110 transition-transform"></i>
+              <span>AI Sahabat Guru</span>
+              <span class="ml-auto text-[8px] font-bold bg-brand-gold/20 text-brand-gold px-1.5 py-0.5 rounded-pill">10 Tools</span>
             </a>
-            <!-- Profil & Kelas (Icon Gold + Soon) -->
-            <a href="#" onclick="showToast('Modul Profil & Kelas.', 'info'); return false;" class="flex items-center gap-3.5 px-4 py-3 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs group">
-              <i data-lucide="user-cog" class="w-4.5 h-4.5 text-brand-gold"></i>
-              <span>Profil & Kelas</span>
-              <span class="ml-auto text-[9px] font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill">Soon</span>
+            <a href="dokumentasi.html" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs">
+              <i data-lucide="camera" class="w-4 h-4 text-brand-gold"></i>
+              <span>Pusat Dokumentasi</span>
+            </a>
+            <a href="profil-kelas.html" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs">
+              <i data-lucide="user-cog" class="w-4 h-4 text-brand-gold"></i>
+              <span>Profil Guru & Kelas</span>
             </a>
           </nav>
         </div>
 
+        <!-- DYNAMIC ACADEMIC GROUP -->
         <div class="pt-2 border-t border-white/5">
-          <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-brand-lightGrey mb-3">Akademik & Ajar</p>
-          <nav class="space-y-1.5">
-            <a href="dokumentasi.html" class="flex items-center gap-3.5 px-4 py-3 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs group">
-              <i data-lucide="camera" class="w-4.5 h-4.5 text-brand-gold group-hover:scale-110 transition-transform"></i>
-              <span>Dokumentasi</span>
-            </a>
-            <!-- Modul Belajar (Icon Gold) -->
-            <a href="modul-belajar.html" class="flex items-center gap-3.5 px-4 py-3 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs">
-              <i data-lucide="book-open" class="w-4.5 h-4.5 text-brand-gold"></i>
-              <span>Modul Belajar</span>
-            </a>
-            <!-- Pendidikan (Icon Gold + Soon) -->
-            <a href="#" onclick="showToast('Modul Pengembangan Pendidikan Guru.', 'info'); return false;" class="flex items-center gap-3.5 px-4 py-3 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs group">
-              <i data-lucide="graduation-cap" class="w-4.5 h-4.5 text-brand-gold"></i>
-              <span>Pendidikan</span>
-              <span class="ml-auto text-[9px] font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill">Soon</span>
-            </a>
+          <p id="dynamic-menu-header" class="px-2 text-[9px] font-bold uppercase tracking-widest text-brand-gold mb-2">Akademik PAUD & TK</p>
+          <nav id="dynamic-sidebar-nav" class="space-y-1">
+            <!-- Inject Otomatis via Dynamic Engine JavaScript -->
           </nav>
         </div>
+
       </div>
 
-      <!-- Status Bar Sync Cloud -->
-      <div class="bg-white/5 rounded-card p-4 border border-white/10 text-xs">
-        <div class="flex items-center gap-2 mb-1">
-          <span class="w-2.5 h-2.5 rounded-pill bg-brand-success animate-pulse"></span>
-          <span class="font-semibold text-white text-xs">Cloud Database Active</span>
+      <!-- Cloud Status Footer -->
+      <div class="mt-4 bg-white/5 rounded-card p-3 border border-white/10 text-[11px]">
+        <div class="flex items-center gap-1.5 mb-0.5">
+          <span class="w-2 h-2 rounded-pill bg-brand-success animate-pulse"></span>
+          <span class="font-semibold text-white">BLG-OS v2.0 Enterprise</span>
         </div>
-        <p class="text-[11px] text-brand-lightGrey">Terhubung otomatis dengan TK Bintang Bulakamba</p>
+        <p class="text-[10px] text-brand-lightGrey">State Engine & PWA Ready</p>
       </div>
     </aside>
 
-    <!-- MAIN DASHBOARD CONTENT -->
-    <main class="flex-1 overflow-y-auto p-6 lg:p-8 space-y-8">
+    <!-- ⚡ MAIN CONTROL CENTER -->
+    <main class="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
 
-      <!-- WELCOME HERO BANNER -->
-      <div class="relative overflow-hidden bg-gradient-to-r from-brand-navyCard via-brand-navyLight to-brand-navyCard text-white rounded-card p-8 shadow-card border border-white/10">
-        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <!-- AREA ①: FLOATING QUICK ACTION BAR -->
+      <div class="bg-brand-navyCard border border-brand-gold/30 rounded-card p-3 shadow-card flex items-center justify-between gap-3 overflow-x-auto">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-gold shrink-0 px-2">⚡ Quick Action:</span>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="presensi-guru.html" class="bg-brand-gold hover:bg-yellow-500 text-brand-navy font-bold text-xs px-3.5 py-1.5 rounded-btn transition-all flex items-center gap-1.5 shadow-sm">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i> ＋ Presensi
+          </a>
+          <a href="dokumentasi.html" class="bg-brand-navyLight hover:bg-white/10 text-brand-gold border border-brand-gold/40 font-semibold text-xs px-3.5 py-1.5 rounded-btn transition-all flex items-center gap-1.5">
+            <i data-lucide="camera" class="w-3.5 h-3.5"></i> ＋ Upload Dokumentasi
+          </a>
+          <button onclick="openAIFeatureModal()" class="bg-brand-navyLight hover:bg-white/10 text-brand-gold border border-brand-gold/40 font-semibold text-xs px-3.5 py-1.5 rounded-btn transition-all flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> ＋ AI Hub
+          </button>
+          <a href="erapor-cetak.html" target="_blank" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3.5 py-1.5 rounded-btn transition-all flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-3.5 h-3.5 text-brand-gold"></i> 🖨️ Cetak Rapor
+          </a>
+        </div>
+      </div>
+
+      <!-- AREA ②: COMPACT HERO & TREND STATS CARDS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        
+        <!-- Hero Compact Banner (7 Cols) -->
+        <div class="lg:col-span-7 bg-gradient-to-r from-brand-navyCard via-brand-navyLight to-brand-navyCard border border-white/10 rounded-card p-6 shadow-card relative overflow-hidden flex flex-col justify-between">
           <div>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-brand-gold/20 text-brand-gold text-xs font-bold border border-brand-gold/30 mb-3">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> PORTAL UTAMA GURU PAUD
+            <span id="hero-badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-pill bg-brand-gold/20 text-brand-gold text-[10px] font-bold border border-brand-gold/30 mb-2">
+              <i data-lucide="sparkles" class="w-3 h-3"></i> WORKSPACE: PAUD & TK
             </span>
-            <h1 class="text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight">Selamat Pagi, Ibu Siti Nurhaliza! 👋</h1>
-            <p class="text-xs sm:text-sm text-brand-lightGrey mt-1 max-w-xl">Kelola dokumentasi portofolio, presensi harian, serta narasi e-Rapor murid Kurikulum Merdeka secara terintegrasi.</p>
+            <h1 class="text-xl sm:text-2xl font-heading font-extrabold text-white tracking-tight">Selamat Pagi, Pak Bustanil! 👋</h1>
+            <p id="hero-subtitle" class="text-xs text-brand-lightGrey mt-1">Fokus hari ini: Selesaikan observasi STEAM dan validasi presensi kelompok B2.</p>
           </div>
-          <div class="flex items-center gap-3 shrink-0 flex-wrap sm:flex-nowrap">
-            <a href="dokumentasi.html" class="bg-brand-navyLight hover:bg-white/10 text-brand-gold border border-brand-gold/40 font-bold text-xs px-5 py-3 rounded-btn shadow-md transition-all flex items-center gap-2">
-              <i data-lucide="camera" class="w-4 h-4"></i>
-              <span>Pusat Dokumentasi</span>
-            </a>
-            <a href="erapor-cetak.html?from=guru" target="_blank" class="bg-brand-gold hover:bg-yellow-500 text-brand-navy font-bold text-xs px-5 py-3 rounded-btn shadow-gold-glow transition-all flex items-center gap-2">
-              <i data-lucide="file-text" class="w-4 h-4"></i>
-              <span>Cetak e-Rapor Digital</span>
-            </a>
+
+          <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brand-warning animate-ping"></span>
+              <span class="text-slate-200 font-semibold">Prioritas: <strong class="text-amber-400">3 Presensi & Validasi Asesmen</strong></span>
+            </div>
+            <a href="presensi-guru.html" class="text-brand-gold hover:underline text-[11px] font-bold">Kerjakan Sekarang →</a>
           </div>
         </div>
 
-        <i data-lucide="layout-dashboard" class="w-64 h-64 text-white/5 absolute -right-10 -bottom-16 pointer-events-none"></i>
-        <div class="absolute top-0 right-1/4 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- Trend Stats Cards Grid (5 Cols) -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3" id="stats-cards-container">
+          <!-- Injected via Context Engine JS -->
+        </div>
+
       </div>
 
-      <!-- POWER BI STATS CARDS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- AREA ③: ACTIVITY & AUDIT TRAIL TIMELINE (POIN 11 REVIEWS) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Total Murid -->
-        <div class="bg-brand-navyCard p-5 rounded-card border border-white/10 shadow-card flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-brand-lightGrey uppercase tracking-wider">Total Murid</span>
-              <span class="text-[10px] font-bold text-brand-info bg-blue-500/10 px-2 py-0.5 rounded-pill border border-blue-500/20">Kelas B2</span>
+        <!-- Schedule Timeline (7 Cols) -->
+        <div class="lg:col-span-7 bg-brand-navyCard rounded-card border border-white/10 p-5 shadow-card space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="calendar" class="w-4 h-4 text-brand-gold"></i>
+              <h3 class="font-bold text-xs text-white font-heading">Agenda & Alur Kegiatan Mengajar</h3>
             </div>
-            <p class="text-2xl lg:text-3xl font-heading font-extrabold text-white mt-3">20 <span class="text-xs font-normal text-brand-lightGrey">Anak</span></p>
+            <span class="text-[11px] text-brand-lightGrey">Selasa, 28 Juli 2026</span>
           </div>
-          <p class="text-[11px] text-brand-lightGrey mt-3">11 Laki-Laki • 9 Perempuan</p>
+
+          <div class="space-y-2.5" id="schedule-container">
+            <!-- Injected via Context Engine -->
+          </div>
         </div>
 
-        <!-- Hadir Hari Ini -->
-        <div class="bg-brand-navyCard p-5 rounded-card border border-white/10 shadow-card flex flex-col justify-between border-l-4 border-l-brand-success">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-brand-success uppercase tracking-wider">Hadir Hari Ini</span>
-              <span class="text-[10px] font-bold text-brand-success bg-emerald-500/10 px-2 py-0.5 rounded-pill border border-emerald-500/20">↑ 90%</span>
+        <!-- ACTIVITY FEED / AUDIT TRAIL (POIN 11 IMPLEMENTATION) -->
+        <div class="lg:col-span-5 bg-brand-navyCard rounded-card border border-white/10 p-5 shadow-card space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="activity" class="w-4 h-4 text-brand-gold"></i>
+              <h3 class="font-bold text-xs text-white font-heading">Histori Aktivitas Sistem</h3>
             </div>
-            <p class="text-2xl lg:text-3xl font-heading font-extrabold text-emerald-400 mt-3">18 <span class="text-xs font-normal text-brand-lightGrey">Anak</span></p>
+            <span class="text-[9px] bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-pill font-bold">Realtime</span>
           </div>
-          <p class="text-[11px] text-brand-lightGrey mt-3">1 Izin • 1 Sakit • 0 Alpa</p>
-        </div>
 
-        <!-- Portofolio Foto -->
-        <div class="bg-brand-navyCard p-5 rounded-card border border-white/10 shadow-card flex flex-col justify-between border-l-4 border-l-brand-gold">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-brand-gold uppercase tracking-wider">Dokumentasi Foto</span>
-              <span class="text-[10px] font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded-pill border border-brand-gold/20">Sync e-Rapor</span>
+          <div class="space-y-3 text-xs">
+            <div class="flex gap-3">
+              <span class="text-[10px] font-mono text-brand-gold shrink-0">08.12</span>
+              <p class="text-slate-300 text-[11px]"><strong class="text-white">Presensi Harian</strong> berhasil dicatat untuk 25 murid.</p>
             </div>
-            <p class="text-2xl lg:text-3xl font-heading font-extrabold text-brand-gold mt-3">142 <span class="text-xs font-normal text-brand-lightGrey">Foto</span></p>
-          </div>
-          <a href="dokumentasi.html" class="text-[11px] text-brand-gold hover:underline mt-3 block">Lihat Galeri Foto →</a>
-        </div>
-
-        <!-- Asesmen Harian -->
-        <div class="bg-brand-navyCard p-5 rounded-card border border-white/10 shadow-card flex flex-col justify-between border-l-4 border-l-brand-warning">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-brand-warning uppercase tracking-wider">Asesmen Harian</span>
-              <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-pill border border-amber-500/20">Target Hari Ini</span>
+            <div class="flex gap-3">
+              <span class="text-[10px] font-mono text-brand-gold shrink-0">08.30</span>
+              <p class="text-slate-300 text-[11px]"><strong class="text-white">AI Generator</strong> membuat 1 narasi e-Rapor otomatis.</p>
             </div>
-            <p class="text-2xl lg:text-3xl font-heading font-extrabold text-amber-400 mt-3">20 <span class="text-xs font-normal text-brand-lightGrey">Status</span></p>
+            <div class="flex gap-3">
+              <span class="text-[10px] font-mono text-brand-gold shrink-0">09.15</span>
+              <p class="text-slate-300 text-[11px]"><strong class="text-white">Dokumentasi Foto</strong> STEAM disinkronkan ke Cloud Server.</p>
+            </div>
           </div>
-          <p class="text-[11px] text-brand-lightGrey mt-3">Observasi Cepat Elemen CP</p>
         </div>
 
       </div>
 
-      <!-- INSPIRATIONAL MOTIVATION BANNER (BG WHITE) -->
-      <div class="relative bg-white border border-brand-gold/40 rounded-card p-6 shadow-soft overflow-hidden group transition-all">
-        <div class="flex flex-col sm:flex-row items-center gap-5 relative z-10">
-          <div class="w-12 h-12 rounded-full bg-brand-gold/15 border border-brand-gold/40 flex items-center justify-center text-brand-goldHover shrink-0 group-hover:scale-110 transition-transform duration-300">
-            <i data-lucide="quote" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1 text-center sm:text-left">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-brand-goldHover">Inspirasi Pendidik BULAENG</p>
-            <p class="font-quote italic text-sm sm:text-base text-slate-800 font-bold leading-relaxed">
-              "Perubahan besar bangsa selalu dimulai dari ruang kelas, dan guru adalah pemimpin perubahan itu."
-            </p>
-          </div>
-        </div>
-        <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl pointer-events-none"></div>
-      </div>
-
-      <!-- MAIN CONTENT GRID -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- AREA ④: AI PRODUCTIVITY CENTER -->
+      <div class="bg-gradient-to-br from-brand-navyCard via-brand-navyLight to-brand-navyCard rounded-card p-5 text-white border border-brand-gold/40 shadow-gold-glow space-y-4 relative overflow-hidden">
         
-        <!-- LEFT COLUMN: SCHEDULE & RECENT DOKUMENTASI (7 Cols) -->
-        <div class="lg:col-span-7 space-y-6">
-          
-          <!-- SCHEDULE -->
-          <div class="bg-brand-navyCard rounded-card border border-white/10 p-6 shadow-card space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-              <div class="flex items-center gap-2">
-                <i data-lucide="calendar" class="w-5 h-5 text-brand-gold"></i>
-                <h3 class="font-bold text-sm text-white font-heading">Jadwal Aktivitas Kelas Hari Ini</h3>
-              </div>
-              <span class="text-xs text-brand-lightGrey">Senin, 27 Juli 2026</span>
+        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-btn bg-brand-gold text-brand-navy flex items-center justify-center font-bold text-xs shadow-md">
+              <i data-lucide="bot" class="w-5 h-5"></i>
             </div>
-
-            <div class="space-y-3">
-              <div class="flex items-center justify-between p-3.5 bg-brand-navyLight border border-brand-gold/20 rounded-btn">
-                <div class="flex items-center gap-3">
-                  <span class="text-xs font-bold px-2.5 py-1 bg-brand-gold/20 text-brand-gold border border-brand-gold/30 rounded-input">08.00–08.30</span>
-                  <div>
-                    <p class="text-xs font-bold text-white">Circle Time & Doa Pagi</p>
-                    <p class="text-[11px] text-brand-lightGrey">Pembuka Hari & Sapaan Murid</p>
-                  </div>
-                </div>
-                <button onclick="showToast('Sesi Circle Time ditandai Selesai!')" class="text-xs font-bold bg-brand-gold hover:bg-yellow-500 text-brand-navy px-3.5 py-1.5 rounded-btn transition-all">Selesai</button>
-              </div>
-
-              <div class="flex items-center justify-between p-3.5 bg-brand-navyLight/50 border border-white/5 rounded-btn">
-                <div class="flex items-center gap-3">
-                  <span class="text-xs font-bold px-2.5 py-1 bg-white/5 text-brand-lightGrey rounded-input">08.30–09.30</span>
-                  <div>
-                    <p class="text-xs font-bold text-slate-200">Praktik Merawat Tanaman Hias</p>
-                    <p class="text-[11px] text-brand-lightGrey">Eksplorasi Halaman & Menyiram Bunga</p>
-                  </div>
-                </div>
-                <a href="dokumentasi.html" class="text-xs font-semibold text-brand-gold border border-brand-gold/30 px-3 py-1.5 rounded-btn hover:bg-brand-gold/10 transition-all flex items-center gap-1">
-                  <i data-lucide="camera" class="w-3.5 h-3.5"></i> Foto Kegiatan
-                </a>
-              </div>
+            <div>
+              <h3 class="font-heading font-bold text-xs text-brand-gold">AI PRODUCTIVITY CENTER (GENERATIVE ENGINE)</h3>
+              <p class="text-[9px] text-brand-lightGrey">Asisten Pembelajaran Lintas Workspace</p>
             </div>
           </div>
-
-          <!-- RECENT DOKUMENTASI PREVIEW -->
-          <div class="bg-brand-navyCard rounded-card border border-white/10 p-6 shadow-card space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-              <div class="flex items-center gap-2">
-                <i data-lucide="camera" class="w-5 h-5 text-brand-gold"></i>
-                <h3 class="font-bold text-sm text-white font-heading">Dokumentasi Portofolio Terbaru</h3>
-              </div>
-              <a href="dokumentasi.html" class="text-xs font-bold text-brand-gold hover:underline">Kelola Dokumentasi →</a>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
-              <!-- Card Dokumentasi 1 -->
-              <div class="border border-white/10 bg-brand-navyLight rounded-card overflow-hidden hover:border-brand-gold/50 transition-all group">
-                <div class="relative aspect-video bg-slate-900">
-                  <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=500" alt="Foto Aktivitas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-brand-gold border border-brand-gold/40 text-[10px] font-bold px-2 py-0.5 rounded-pill">🟡 STEAM & Seni</span>
-                </div>
-                <div class="p-4 space-y-2">
-                  <div class="flex justify-between items-center text-[10px] text-brand-lightGrey">
-                    <span class="font-bold text-white">Ananda Budi</span>
-                    <span>27 Juli 2026</span>
-                  </div>
-                  <p class="text-xs text-slate-300 line-clamp-2">Menyusun balok geometri sesuai susunan warna tanpa bantuan.</p>
-                </div>
-              </div>
-
-              <!-- Card Dokumentasi 2 -->
-              <div class="border border-white/10 bg-brand-navyLight rounded-card overflow-hidden hover:border-brand-gold/50 transition-all group">
-                <div class="relative aspect-video bg-slate-900">
-                  <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=500" alt="Foto Agenda" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                  <span class="absolute top-2 left-2 bg-brand-navy/90 text-blue-400 border border-blue-500/40 text-[10px] font-bold px-2 py-0.5 rounded-pill">🏛️ Agenda Sekolah</span>
-                </div>
-                <div class="p-4 space-y-2">
-                  <div class="flex justify-between items-center text-[10px] text-brand-lightGrey">
-                    <span class="font-bold text-white">TK Bintang Bulakamba</span>
-                    <span>20 Juli 2026</span>
-                  </div>
-                  <p class="text-xs text-slate-300 line-clamp-2">Rapat Koordinasi Komite Sekolah & Wali Murid Awal Semester.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
         </div>
 
-        <!-- RIGHT COLUMN: AI SAHABAT GURU & RAPOR ASSISTANT (5 Cols) -->
-        <div class="lg:col-span-5 space-y-6">
+        <div class="space-y-1.5">
+          <p class="text-[10px] text-slate-300 font-semibold">Pilih Apa Yang Ingin Anda Buat:</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px]">
+            <button onclick="setAIPrompt('Buatkan narasi e-Rapor Kurikulum Merdeka untuk murid bernama Budi...')" class="p-2 bg-brand-navy border border-white/10 hover:border-brand-gold rounded-btn text-left text-brand-gold font-medium transition-all">✨ Narasi Rapor</button>
+            <button onclick="setAIPrompt('Buatkan Modul Ajar STEAM topik Tanaman Hias untuk PAUD...')" class="p-2 bg-brand-navy border border-white/10 hover:border-brand-gold rounded-btn text-left text-slate-200 hover:text-white font-medium transition-all">📘 Generate Modul</button>
+            <button onclick="setAIPrompt('Buatkan Alur Tujuan Pembelajaran (ATP) Elemen Jati Diri...')" class="p-2 bg-brand-navy border border-white/10 hover:border-brand-gold rounded-btn text-left text-slate-200 hover:text-white font-medium transition-all">🎯 Generate ATP</button>
+            <button onclick="setAIPrompt('Buatkan 5 soal pilihan ganda HOTS tentang ekosistem...')" class="p-2 bg-brand-navy border border-white/10 hover:border-brand-gold rounded-btn text-left text-slate-200 hover:text-white font-medium transition-all">📝 Buat Bank Soal</button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <textarea id="ai-input" rows="2" placeholder="Ketik pengamatan atau instruksi untuk AI..." class="w-full bg-brand-navy border border-white/20 rounded-input p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition-all"></textarea>
           
-          <!-- AI SAHABAT GURU CONTAINER -->
-          <div class="bg-gradient-to-br from-brand-navyCard via-brand-navyLight to-brand-navyCard rounded-card p-6 text-white border border-brand-gold/40 shadow-gold-glow space-y-4 relative overflow-hidden">
-            
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-btn bg-brand-gold text-brand-navy flex items-center justify-center font-bold text-sm shadow-md">
-                  <i data-lucide="bot" class="w-6 h-6"></i>
-                </div>
-                <div>
-                  <h3 class="font-heading font-bold text-sm text-brand-gold">AI SAHABAT GURU</h3>
-                  <p class="text-[10px] text-brand-lightGrey">Generator Narasi Rapor Otomatis</p>
-                </div>
-              </div>
-            </div>
+          <button onclick="generateAINarasi()" class="w-full bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs py-2 rounded-btn flex items-center justify-center gap-2 shadow-md transition-all">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-navy"></i> Eksekusi AI Generator Engine
+          </button>
+        </div>
 
-            <div class="space-y-2">
-              <label class="block text-xs text-slate-200 font-medium">Ketik pengamatan singkat murid hari ini:</label>
-              <textarea id="ai-input" rows="3" placeholder="Contoh: Ananda Budi aktif merapikan mainan dan mampu menghitung kelopak bunga dengan benar..." class="w-full bg-brand-navy border border-white/20 rounded-input p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition-all"></textarea>
-              
-              <button onclick="generateAINarasi()" class="w-full bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-400 hover:to-brand-gold text-brand-navy font-bold text-xs py-2.5 rounded-btn flex items-center justify-center gap-2 shadow-md transition-all">
-                <i data-lucide="sparkles" class="w-4 h-4 text-brand-navy"></i> Generate Narasi Kurikulum Merdeka
-              </button>
-            </div>
-
-            <!-- AI Result Box -->
-            <div id="ai-result-box" class="bg-brand-navy/80 border border-brand-gold/30 rounded-input p-3.5 space-y-2 text-xs hidden">
-              <p class="text-brand-gold font-bold text-[11px]">Hasil Narasi Otomatis (Siap Copy):</p>
-              <p id="ai-output-text" class="text-slate-200 text-[11px] leading-relaxed italic">
-                "Ananda Budi menunjukkan perkembangan yang sangat baik dalam elemen Kemandirian serta Dasar Literasi & STEAM. Ananda terbiasa merapikan alat belajar dan mampu mengklasifikasikan benda sesuai jumlahnya."
-              </p>
-              <button onclick="copyAINarasi()" class="text-[10px] font-bold text-brand-gold bg-brand-gold/10 px-2.5 py-1 rounded-md border border-brand-gold/30 hover:bg-brand-gold/20 flex items-center gap-1 mt-1">
-                <i data-lucide="copy" class="w-3 h-3"></i> Salin Narasi
-              </button>
-            </div>
-
-          </div>
-
-          <!-- QUICK LINK TO DOKUMENTASI & PROFIL -->
-          <div class="bg-brand-navyCard rounded-card border border-white/10 p-6 shadow-card space-y-3">
-            <h3 class="font-bold text-sm text-white font-heading">Portofolio & Galeri Publik</h3>
-            <p class="text-xs text-brand-lightGrey leading-relaxed">Kelola penyaluran foto kegiatan murid ke Dashboard Orang Tua, e-Rapor, dan Website Utama Sekolah.</p>
-            <a href="dokumentasi.html" class="w-full bg-brand-navyLight border border-brand-gold/30 hover:border-brand-gold text-brand-gold font-bold text-xs py-3 rounded-btn flex items-center justify-center gap-2 transition-all">
-              <i data-lucide="camera" class="w-4 h-4"></i> Kelola Galeri & Distribusi Foto
-            </a>
-          </div>
-
+        <!-- AI Result Box -->
+        <div id="ai-result-box" class="bg-brand-navy/80 border border-brand-gold/30 rounded-input p-3 space-y-2 text-xs hidden">
+          <p class="text-brand-gold font-bold text-[10px]">Hasil Generator AI (Siap Copy):</p>
+          <p id="ai-output-text" class="text-slate-200 text-[10px] leading-relaxed italic">
+            "Ananda menunjukkan perkembangan luar biasa pada aspek motorik halus dan kemandirian."
+          </p>
+          <button onclick="copyAINarasi()" class="text-[9px] font-bold text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/30 hover:bg-brand-gold/20 flex items-center gap-1">
+            <i data-lucide="copy" class="w-3 h-3"></i> Salin Hasil
+          </button>
         </div>
 
       </div>
@@ -430,11 +411,309 @@
 
   </div>
 
-  <!-- JAVASCRIPT SYSTEM -->
+  <!-- 📱 MOBILE BOTTOM NAVIGATION BAR (POIN 8 REVIEWS) -->
+  <div class="fixed bottom-0 left-0 right-0 bg-brand-navyCard border-t border-white/10 h-16 md:hidden flex items-center justify-around z-40 px-2 text-[10px]">
+    <a href="dashboard-guru.html" class="flex flex-col items-center gap-1 text-brand-gold font-bold">
+      <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="presensi-guru.html" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white">
+      <i data-lucide="user-check" class="w-4 h-4"></i>
+      <span>Presensi</span>
+    </a>
+    <button onclick="openAIFeatureModal()" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white">
+      <i data-lucide="bot" class="w-4 h-4 text-brand-gold"></i>
+      <span>AI Hub</span>
+    </button>
+    <a href="dokumentasi.html" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white">
+      <i data-lucide="camera" class="w-4 h-4"></i>
+      <span>Galeri</span>
+    </a>
+    <a href="profil-kelas.html" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white">
+      <i data-lucide="user-cog" class="w-4 h-4"></i>
+      <span>Profil</span>
+    </a>
+  </div>
+
+  <!-- 🔍 GLOBAL COMMAND PALETTE SEARCH MODAL (⌘K) -->
+  <div id="search-palette-modal" class="fixed inset-0 z-50 bg-brand-navy/80 backdrop-blur-sm hidden flex items-start justify-center pt-20 p-4">
+    <div class="bg-brand-navyCard border border-brand-gold/40 rounded-card max-w-lg w-full p-4 shadow-gold-glow space-y-4 text-white relative">
+      <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+        <i data-lucide="search" class="w-4 h-4 text-brand-gold"></i>
+        <input type="text" placeholder="Ketik pencarian murid, modul, nilai, atau laporan..." class="w-full bg-transparent text-xs text-white focus:outline-none placeholder-slate-500">
+        <button onclick="closeSearchPalette()" class="text-[10px] bg-white/10 px-2 py-1 rounded text-slate-300">ESC</button>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <p class="text-[9px] font-bold uppercase tracking-wider text-brand-lightGrey">Command Shortcut</p>
+        <div class="grid grid-cols-2 gap-2 text-[11px]">
+          <button onclick="showToast('Mencari Data Murid...', 'info')" class="p-2 bg-brand-navyLight hover:bg-white/10 rounded-btn text-left flex items-center gap-2">
+            <i data-lucide="users" class="w-3.5 h-3.5 text-brand-gold"></i> Cari Murid
+          </button>
+          <button onclick="showToast('Mencari Modul Belajar...', 'info')" class="p-2 bg-brand-navyLight hover:bg-white/10 rounded-btn text-left flex items-center gap-2">
+            <i data-lucide="book" class="w-3.5 h-3.5 text-brand-gold"></i> Cari Modul
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🤖 AI 10 CAPABILITIES MODAL -->
+  <div id="ai-tools-modal" class="fixed inset-0 z-50 bg-brand-navy/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-brand-navyCard border border-brand-gold/40 rounded-card max-w-xl w-full p-5 shadow-gold-glow space-y-4 text-white relative">
+      <button onclick="closeAIFeatureModal()" class="absolute top-4 right-4 text-brand-lightGrey hover:text-white">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+        <div class="w-9 h-9 rounded-btn bg-brand-gold text-brand-navy flex items-center justify-center font-bold">
+          <i data-lucide="bot" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-heading font-extrabold text-sm text-white">AI SAHABAT GURU - 10 CAPABILITIES</h3>
+          <p class="text-[10px] text-brand-gold">Pusat Asisten Edukasi Generatif BULAENG OS</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+        <button onclick="showToast('Tanya AI Aktif', 'info')" class="p-2.5 bg-brand-navyLight hover:border-brand-gold border border-white/10 rounded-btn text-left space-y-0.5">
+          <p class="font-bold text-brand-gold text-[11px]">💬 Tanya AI</p>
+          <p class="text-[9px] text-brand-lightGrey">Konsultasi Kurikulum</p>
+        </button>
+        <button onclick="showToast('Buat Modul Aktif', 'info')" class="p-2.5 bg-brand-navyLight hover:border-brand-gold border border-white/10 rounded-btn text-left space-y-0.5">
+          <p class="font-bold text-brand-gold text-[11px]">📘 Buat Modul</p>
+          <p class="text-[9px] text-brand-lightGrey">Modul Ajar Otomatis</p>
+        </button>
+        <button onclick="showToast('Buat ATP Aktif', 'info')" class="p-2.5 bg-brand-navyLight hover:border-brand-gold border border-white/10 rounded-btn text-left space-y-0.5">
+          <p class="font-bold text-brand-gold text-[11px]">🎯 Buat ATP</p>
+          <p class="text-[9px] text-brand-lightGrey">Alur Tujuan Belajar</p>
+        </button>
+        <button onclick="showToast('Buat Rubrik Aktif', 'info')" class="p-2.5 bg-brand-navyLight hover:border-brand-gold border border-white/10 rounded-btn text-left space-y-0.5">
+          <p class="font-bold text-brand-gold text-[11px]">📊 Buat Rubrik</p>
+          <p class="text-[9px] text-brand-lightGrey">Rubrik Penilaian</p>
+        </button>
+        <button onclick="showToast('Buat Soal Aktif', 'info')" class="p-2.5 bg-brand-navyLight hover:border-brand-gold border border-white/10 rounded-btn text-left space-y-0.5">
+          <p class="font-bold text-brand-gold text-[11px]">📝 Buat Soal</p>
+          <p class="text-[9px] text-brand-lightGrey">Bank Soal HOTS</p>
+        </button>
+        <button onclick="showToast('Narasi Rapor Aktif', 'info')" class="p-2.5 bg-brand-navyLight hover:border-brand-gold border border-white/10 rounded-btn text-left space-y-0.5">
+          <p class="font-bold text-brand-gold text-[11px]">✍️ Narasi Rapor</p>
+          <p class="text-[9px] text-brand-lightGrey">Deskripsi Capaian</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⚙️ JAVASCRIPT STATE ENGINE & PWA SYNC ENGINE -->
   <script>
     lucide.createIcons();
 
-    // TOAST NOTIFICATION SYSTEM
+    // WORKSPACE CONFIGURATION DATABASE
+    const workspaceConfigs = {
+      paud: {
+        label: "PAUD & TK",
+        schoolName: "TK Negeri 1 Taliwang",
+        heroBadge: "WORKSPACE: PAUD & TK",
+        heroSubtitle: "Fokus hari ini: Selesaikan observasi STEAM dan validasi presensi kelompok B2.",
+        menuHeader: "Akademik PAUD & TK",
+        menus: [
+          { name: "Presensi Murid", icon: "user-check", link: "presensi-guru.html" },
+          { name: "Capaian STPPA", icon: "award", link: "#" },
+          { name: "Observasi Harian", icon: "eye", link: "#" },
+          { name: "Portofolio Murid", icon: "image", link: "dokumentasi.html" },
+          { name: "e-Rapor PAUD", icon: "file-text", link: "#" },
+          { name: "Modul Bermain", icon: "gamepad-2", link: "modul-belajar.html" }
+        ],
+        stats: [
+          { title: "Total Murid B2", value: "26 Anak", trend: "▲ +2 minggu ini", desc: "12 Laki • 14 Peremp." },
+          { title: "Kehadiran Today", value: "96%", trend: "↑ +5% dibanding kemarin", desc: "25 Hadir • 1 Izin" }
+        ],
+        schedules: [
+          { time: "08.00 - 08.30", title: "Circle Time & Doa Pagi", desc: "Pembiasaan Karakter Mulia" },
+          { time: "08.30 - 09.30", title: "Eksplorasi STEAM - Menyiram Bunga", desc: "Observasi Struktur Kelopak Daun" }
+        ]
+      },
+      sd: {
+        label: "Primary School (SD/MI)",
+        schoolName: "SD Negeri 01 Taliwang",
+        heroBadge: "WORKSPACE: PRIMARY SCHOOL (SD/MI)",
+        heroSubtitle: "Fokus hari ini: Latihan matematika pecahan desimal dan input nilai IPAS.",
+        menuHeader: "Akademik SD / MI",
+        menus: [
+          { name: "Presensi Kelas 4A", icon: "user-check", link: "#" },
+          { name: "Mata Pelajaran", icon: "book", link: "#" },
+          { name: "CP & ATP Merdeka", icon: "target", link: "#" },
+          { name: "Modul Ajar SD", icon: "file-code", link: "#" },
+          { name: "Asesmen & Nilai", icon: "bar-chart", link: "#" },
+          { name: "Proyek P5 SD", icon: "compass", link: "#" }
+        ],
+        stats: [
+          { title: "Siswa Kelas 4A", value: "28 Siswa", trend: "100% Hadir", desc: "14 Laki • 14 Peremp." },
+          { title: "Progress ATP", value: "78%", trend: "▲ +12% semester ini", desc: "Target Kurikulum KSP" }
+        ],
+        schedules: [
+          { time: "07.30 - 09.00", title: "Matematika - Pecahan Desimal", desc: "Latihan Soal Halaman 42" },
+          { time: "09.15 - 10.45", title: "IPAS - Ekosistem Lingkungan", desc: "Observasi Taman Sekolah" }
+        ]
+      },
+      smp: {
+        label: "Junior High (SMP/MTs)",
+        schoolName: "SMP Negeri 1 Taliwang",
+        heroBadge: "WORKSPACE: JUNIOR HIGH (SMP/MTs)",
+        heroSubtitle: "Fokus hari ini: Lab IPA Sistem Pencernaan dan monitoring Proyek P5.",
+        menuHeader: "Akademik SMP / MTs",
+        menus: [
+          { name: "Presensi Kelas 8B", icon: "user-check", link: "#" },
+          { name: "Mata Pelajaran", icon: "book-open", link: "#" },
+          { name: "KKTP & Nilai", icon: "check-circle", link: "#" },
+          { name: "Proyek P5 SMP", icon: "compass", link: "#" }
+        ],
+        stats: [
+          { title: "Siswa Kelas 8B", value: "32 Siswa", trend: "97% Kehadiran", desc: "31 Hadir • 1 Sakit" },
+          { title: "Rata-Rata Nilai", value: "85.4", trend: "▲ +3.2 Formatif", desc: "Uji Kompetensi IPA" }
+        ],
+        schedules: [
+          { time: "07.30 - 09.10", title: "IPA - Sistem Pencernaan", desc: "Uji Nutrisi Lab Terpadu" }
+        ]
+      },
+      sma: {
+        label: "Senior High & SMK",
+        schoolName: "SMK Negeri 1 Taliwang (Vokasi)",
+        heroBadge: "WORKSPACE: SENIOR HIGH & SMK",
+        heroSubtitle: "Fokus hari ini: Praktikum Rest API Node.js dan validasi jurnal PKL DUDI.",
+        menuHeader: "Akademik SMA / SMK",
+        menus: [
+          { name: "Presensi RPL 1", icon: "user-check", link: "#" },
+          { name: "Modul Vokasi", icon: "briefcase", link: "#" },
+          { name: "Jurnal PKL DUDI", icon: "file-code", link: "#" },
+          { name: "Analitik Lulusan", icon: "line-chart", link: "#" }
+        ],
+        stats: [
+          { title: "Siswa RPL 1", value: "35 Siswa", trend: "100% Hadir Lab", desc: "20 Laki • 15 Peremp." },
+          { title: "Uji Kompetensi", value: "90% Pass", trend: "Standard KKTP", desc: "12 Industri Partner" }
+        ],
+        schedules: [
+          { time: "08.00 - 12.00", title: "Praktikum Web Dev", desc: "Pembuatan Rest API Node.js" }
+        ]
+      }
+    };
+
+    // OFFLINE DETECTOR (POIN 13 IMPLEMENTATION)
+    window.addEventListener('offline', () => {
+      document.getElementById('offline-banner').classList.remove('hidden');
+      showToast("Koneksi terputus. Mengaktifkan Mode Offline PWA Local Engine.", "info");
+    });
+    window.addEventListener('online', () => {
+      document.getElementById('offline-banner').classList.add('hidden');
+      showToast("Terhubung kembali! Data lokal berhasil disinkronkan.", "success");
+    });
+
+    function toggleWorkspaceDropdown() {
+      document.getElementById('workspace-menu').classList.toggle('hidden');
+      document.getElementById('notification-menu').classList.add('hidden');
+    }
+
+    function toggleNotificationMenu() {
+      document.getElementById('notification-menu').classList.toggle('hidden');
+      document.getElementById('workspace-menu').classList.add('hidden');
+    }
+
+    function openSearchPalette() {
+      document.getElementById('search-palette-modal').classList.remove('hidden');
+    }
+
+    function closeSearchPalette() {
+      document.getElementById('search-palette-modal').classList.add('hidden');
+    }
+
+    function openAIFeatureModal() {
+      document.getElementById('ai-tools-modal').classList.remove('hidden');
+    }
+
+    function closeAIFeatureModal() {
+      document.getElementById('ai-tools-modal').classList.add('hidden');
+    }
+
+    function setAIPrompt(promptText) {
+      document.getElementById('ai-input').value = promptText;
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearchPalette();
+      }
+      if (e.key === 'Escape') {
+        closeSearchPalette();
+        closeAIFeatureModal();
+      }
+    });
+
+    function switchWorkspace(workspaceKey) {
+      const config = workspaceConfigs[workspaceKey];
+      if (!config) return;
+
+      document.getElementById('current-workspace-label').innerText = config.label;
+      document.getElementById('tenant-school-name').innerText = config.schoolName;
+      document.getElementById('hero-badge').innerHTML = `<i data-lucide="sparkles" class="w-3 h-3"></i> ${config.heroBadge}`;
+      document.getElementById('hero-subtitle').innerText = config.heroSubtitle;
+      document.getElementById('dynamic-menu-header').innerText = config.menuHeader;
+
+      // Inject Dynamic Sidebar
+      const navContainer = document.getElementById('dynamic-sidebar-nav');
+      navContainer.innerHTML = '';
+      config.menus.forEach(menu => {
+        navContainer.innerHTML += `
+          <a href="${menu.link}" class="flex items-center gap-3 px-3 py-2 text-slate-200 hover:text-white hover:bg-white/5 rounded-btn transition-all font-semibold text-xs">
+            <i data-lucide="${menu.icon}" class="w-4 h-4 text-brand-gold"></i>
+            <span>${menu.name}</span>
+          </a>
+        `;
+      });
+
+      // Inject Dynamic Trend Stats
+      const statsContainer = document.getElementById('stats-cards-container');
+      statsContainer.innerHTML = '';
+      config.stats.forEach((stat, idx) => {
+        statsContainer.innerHTML += `
+          <div class="bg-brand-navyCard p-4 rounded-card border border-white/10 shadow-card flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold text-brand-lightGrey uppercase tracking-wider">${stat.title}</span>
+              <p class="text-xl font-heading font-extrabold text-white mt-1">${stat.value}</p>
+              <span class="text-[9px] font-bold text-brand-success bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 inline-block mt-1">${stat.trend}</span>
+            </div>
+            <p class="text-[10px] text-brand-lightGrey mt-2">${stat.desc}</p>
+          </div>
+        `;
+      });
+
+      // Inject Dynamic Schedule
+      const scheduleContainer = document.getElementById('schedule-container');
+      scheduleContainer.innerHTML = '';
+      config.schedules.forEach(sch => {
+        scheduleContainer.innerHTML += `
+          <div class="flex items-center justify-between p-3 bg-brand-navyLight border border-brand-gold/20 rounded-btn">
+            <div class="flex items-center gap-2.5">
+              <span class="text-[11px] font-bold px-2 py-0.5 bg-brand-gold/20 text-brand-gold border border-brand-gold/30 rounded">${sch.time}</span>
+              <div>
+                <p class="text-xs font-bold text-white">${sch.title}</p>
+                <p class="text-[10px] text-brand-lightGrey">${sch.desc}</p>
+              </div>
+            </div>
+            <button onclick="showToast('Kegiatan Ditandai Selesai!')" class="text-[10px] font-bold bg-brand-gold hover:bg-yellow-500 text-brand-navy px-3 py-1 rounded transition-all">Selesai</button>
+          </div>
+        `;
+      });
+
+      document.getElementById('workspace-menu').classList.add('hidden');
+      lucide.createIcons();
+      showToast(`Context Workspace Switch: ${config.label}`, 'success');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      switchWorkspace('paud');
+    });
+
     function showToast(message, type = 'success') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
@@ -450,9 +729,9 @@
           icon = "info";
       }
 
-      toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-card border shadow-toast transform transition-all duration-300 opacity-0 translate-y-[-10px] ${bgClass}`;
+      toast.className = `pointer-events-auto flex items-center gap-2.5 px-3.5 py-2.5 rounded-card border shadow-toast transform transition-all duration-300 opacity-0 translate-y-[-10px] ${bgClass}`;
       toast.innerHTML = `
-          <i data-lucide="${icon}" class="w-5 h-5 text-brand-gold"></i>
+          <i data-lucide="${icon}" class="w-4 h-4 text-brand-gold"></i>
           <span class="text-xs font-semibold">${message}</span>
       `;
 
@@ -466,23 +745,20 @@
       }, 3000);
     }
 
-    // AI GENERATOR SIMULATION
     function generateAINarasi() {
       const input = document.getElementById('ai-input').value;
       if (!input.trim()) {
-        showToast("Silakan isi catatan pengamatan terlebih dahulu", "info");
+        showToast("Silakan ketik instruksi terlebih dahulu", "info");
         return;
       }
-      
-      const resultBox = document.getElementById('ai-result-box');
-      resultBox.classList.remove('hidden');
-      showToast("Narasi Rapor Kurikulum Merdeka Berhasil Dibuat!", "success");
+      document.getElementById('ai-result-box').classList.remove('hidden');
+      showToast("Hasil AI Generator Berhasil Dibuat!", "success");
     }
 
     function copyAINarasi() {
       const text = document.getElementById('ai-output-text').innerText;
       navigator.clipboard.writeText(text);
-      showToast("Narasi disalin ke Clipboard!", "success");
+      showToast("Hasil disalin ke Clipboard!", "success");
     }
   </script>
 </body>

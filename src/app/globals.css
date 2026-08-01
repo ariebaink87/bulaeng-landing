@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* --- DESIGN SYSTEM COLOR TOKENS (BLG-DS-001) --- */
+@theme {
+  --color-brand-navy: #111B38;
+  --color-brand-navy-light: #182548;
+  --color-brand-navy-card: #111B38;
+  --color-brand-gold: #D4AF37;
+  --color-brand-gold-dark: #b8952b;
+}
+
+@layer utilities {
+  /* --- 1. SHADOW UTAMA SESUAI BAB 4 & 6 BLG-DS-001 --- */
+  .shadow-soft-bulaeng {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  /* --- 2. GOLD AMBIENT SHADOWS (AKSEN EMAS ELEGAN) --- */
+  .shadow-gold-sm {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  }
+
+  .shadow-gold-md {
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.40);
+  }
+
+  .shadow-gold-lg {
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.55);
+  }
+
+  /* --- 3. GLOW PREMIUM --- */
+  .glow-gold-premium {
+    box-shadow: 
+      0 0 15px rgba(212, 175, 55, 0.30),
+      0 0 35px rgba(212, 175, 55, 0.25);
+  }
+
+  .glow-gold-premium-hover:hover {
+    box-shadow: 
+      0 0 20px rgba(212, 175, 55, 0.45),
+      0 0 45px rgba(212, 175, 55, 0.35);
+  }
+
+  /* --- 4. HERO PATTERN (BAB 11 BANNER STYLE) --- */
+  .bg-hero-refined {
+    background-color: #111B38;
+    background-image: 
+      radial-gradient(rgba(212, 175, 55, 0.12) 1.5px, transparent 1.5px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 24px 24px, 100% 12px;
+    animation: moveBackground 60s linear infinite;
+  }
+}
+
+/* --- ANIMATION (BAB 19 MOTION STYLE) --- */
+@keyframes moveBackground {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 24px 24px, 0 0; }
+}
+
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 4s ease-in-out infinite;
+}

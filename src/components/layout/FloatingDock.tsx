@@ -5,7 +5,7 @@ import React from "react";
 export const FloatingDock: React.FC = () => {
   const navItems = [
     { label: "Presensi Realtime", icon: "⏱️", href: "#" },
-    { label: "Dashboard Guru", icon: "👨‍🏫", href: "#" },
+    { label: "Dashboard Guru", icon: "👨‍🏫", href: "https://bulaeng-app-flqk.vercel.app" },
     { label: "Portal Kepsek", icon: "🏛️", href: "#" },
     { label: "Portal Orang Tua", icon: "👨‍👩‍👧", href: "#" },
     { label: "HQ Admin", icon: "⚙️", href: "#" },

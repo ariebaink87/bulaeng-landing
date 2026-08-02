@@ -17,9 +17,11 @@ export const FloatingDock: React.FC = () => {
         <a
           key={index}
           href={item.href}
+          target={item.href !== "#" ? "_blank" : "_self"}
+          rel="noopener noreferrer"
           title={item.label}
           /* Dimensi 60px x 60px dengan Hover Glow Emas Membesar & Scale */
-          className="w-[60px] h-[60px] rounded-[20px] bg-[#131F3A]/90 border border-[#D4AF37]/30 flex items-center justify-center text-xl backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-[#D4AF37] hover:bg-[#1c2c52] glow-gold-premium-hover group relative"
+          className="w-[60px] h-[60px] rounded-[20px] bg-[#131F3A]/90 border border-[#D4AF37]/30 flex items-center justify-center text-xl backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-[#D4AF37] hover:bg-[#1c2c52] glow-gold-premium-hover group relative cursor-pointer"
         >
           <span>{item.icon}</span>
 
